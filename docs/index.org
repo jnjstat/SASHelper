@@ -1,0 +1,572 @@
+﻿#+TITLE: SAS Helper User Manual
+#+AUTHOR: Phyllis Wolf, Kenneth Yan
+#+TAGS: Window Library Filter Variables Frequency Find Sort Option Shortcuts Dataset
+#+SETUPFILE: bigblow-local.setup
+* Introduction
+SAS Helper is a convenient tool to help SAS users to view SAS datasets.
+** Features
+- High performance and much faster than SAS Universal Viewer
+- Flexible and efficient dataset filter system, three ways to filter data:
+ - One key shortcut
+ - Context menu
+ - Edit the filter manually
+- Subset an entire library of data for the patient you're following using library filter
+ - A Library filter will be applied to all datasets from the same library.
+ - It will have no effect on datasets from another library.
+- Keep all your favorite library paths in the workspace for instant access
+- Quickly find the frequency of one/multiple variables without having to write any SAS code
+- Count unique USUBJIDs by one/multiple variables
+- Hide/Unhide variables
+- Variables reorder
+- Support simple SAS statements, such as KEEP, DROP, TABLE.
+- Support both *.sas7bdat* and *.xpt*
+
+** Prerequisite
+- OS: 64 bits Windows system, such as Windows 10, Windows 7, and Windows Server 2008 R2 Enterprise. 
+
+** Support Information
+#+BEGIN_info
+Please write Email to: \\
+
+[[mailto:DL-RNDUS-SASHelper-Support@ITS.JNJ.com][DL-RNDUS-SASHelper-Support]]
+
+#+END_info
+
+** SASHelper user interface
+*** The default layout
+[[./Pictures/LayoutDefault.png]]
+*** View variables layout
+[[./Pictures/LayoutViewVar.png]]
+
+*** View frequencies layout
+[[./Pictures/LayoutViewFreq.png]]
+
+*** View shortcut keys layout
+[[./Pictures/LayoutShortcutKeys.png]]
+
+*** Options dialog window
+[[./Pictures/LayoutOptions.png]]
+
+* Tutorial
+This is a step by step tutorial to show you the main features of SASHelper. There is also a screenshot of each step for your reference.
+Let's assume that SASHelper is in the folder c:/SASHelper/. 
+** Open SASHelper.exe
+[[./Pictures/Image001.png]]
+** Open a SAS dataset c:/SASHelper/Docs/Samples/SDTM/dm.sas7bdat
+[[./Pictures/Image002.png]]
+
+** Set an alias "DemoSDTM" for the library c:/SASHelper/Docs/Samples/SDTM/
+
+*** Right click on "c:\SASHelper\Docs\Samples\SDTM\" and then click "Set Libname"
+ [[./Pictures/Image003.png]]
+
+*** Type in the libname "DemoSDTM", and click "OK" button.
+ [[./Pictures/Image004.png]]
+
+** Click the "Auto Hide" button of the Workspace window
+[[./Pictures/Image007.png]]
+
+** Move the mouse cursor on the tab "Variables - dm" on the right side and hover.
+[[./Pictures/Image009.png]]
+
+** Dock the Variables window
+*** Click the "Auto Hide" button of the Variables window
+ [[./Pictures/Image009a.png]]
+*** You can see the Variables window is docked.
+ [[./Pictures/Image010.png]]
+
+** Click any cell of the Dataset window and make the Dataset window get focus
+
+** Right click on any cell of the column USUBJID and click "Hide Variable"
+[[./Pictures/Image011.png]]
+
+** Click any cell of the Variables window and make the Variables window get focus
+[[./Pictures/Image012.png]]
+
+** Click the checkbox on the row USUBJID
+[[./Pictures/Image013.png]]
+
+** Let's Hide All Variables
+***  Right click on any cell of the Variables window, and click "Hide All Variables"
+
+[[./Pictures/Image015.png]]
+*** You will see that all the variables are hidden.
+[[./Pictures/Image016.png]]
+
+** Click the checkbox to show the variables USUBJID, AGE, SEX, and ARM
+[[./Pictures/Image017.png]]
+
+** Click any cell of the Dataset window and make the Dataset window get focus
+
+** Let's calculate the Frequency of SEX by context menu
+*** Right click any cell of the column SEX, and click "Frequency"
+[[./Pictures/Image018.png]]
+*** Now you will see the frequencies of SEX on right side Frequency window.
+[[./Pictures/Image019.png]]
+
+** Let's calculate the Frequency of ARM by shortcut key 'F'
+*** Click any cell of the column ARM, and press the key 'F' on the keyboard
+[[./Pictures/Image020.png]]
+*** Now you will see the frequencies of ARM on right side Frequency window.
+[[./Pictures/Image021.png]]
+
+** Crosstabulation
+
+*** Hold Ctrl key, click any cell of the column SEX, then click any cell of the column ARM
+[[./Pictures/Image022.png]]
+
+*** press the key 'F' on the keyboard
+[[./Pictures/Image023.png]]
+
+** Let's open another SAS dataset
+
+*** Click "Workspace" on the left side
+
+*** Double click "ae.sas7bdat"
+[[./Pictures/Image025.png]]
+
+** Click any cell of the Dataset window with the title "ae.sas7bdat" and make it get focus
+
+** Let's calculate the "Frequency(USUBJID)" of USUBJID
+*** Right click any cell of the column USUBJID and click "Frequency(USUBJID)"
+[[./Pictures/Image027.png]]
+*** Now you will see the count of distict USUBJID of USUBJID on right side Frequency window.
+[[./Pictures/Image028.png]]
+
+** Try again to right click any cell of the column STUDYID and click "Frequency(USUBJID)"
+[[./Pictures/Image029.png]]
+
+** Let's try the Find feature
+
+*** Press shortcut key "Ctrl + F", enter "Vomiting" in the Find ComboBox and press "Enter" key
+[[./Pictures/Image030.png]]
+
+*** Press "F3" to find next one, and you will find that the Find feature is case insensitive.
+[[./Pictures/Image031.png]]
+
+*** Let's try to enter the filter manually
+
+**** Click the Command ComboBox
+[[./Pictures/Image032.png]]
+
+**** Enter "if aeseq = 3", and press "Enter" key
+[[./Pictures/Image033.png]]
+
+**** Press the shortcut key "C" to clear the dataset filter, and you will see "clear dataset filter" in the Command ComboBox
+[[./Pictures/Image034.png]]
+
+**** Press the shortcut key "F5" to focus Command ComboBox, then enter "if aestdy > aeendy"
+[[./Pictures/Image035.png]]
+
+* How-to Guide
+** How to subset a single dataset?                          :Filter:Dataset:
+- Right click on the variable's value to be used in the IF clause. 
+- Choose from the IF clauses listed in the context menu.
+- Repeat the above steps below if you need to add another subset condition.
+
+#+BEGIN_info
+Shortcut Key: *D*.
+
+D stands for Dataset filter, and the default operator is '='.
+
+Reter to [[*Shortcut Keys][/Shortcut Keys/]] for other shortcut keys. For example, the '<' key will filter for all values less than the value you are on.
+#+END_info
+
+** How to Clear the dataset filter?      :Filter:Dataset:
+Right click anywhere on the data and choose “Clear Dataset Filter” from the context menu.
+
+#+BEGIN_info
+Shortcut Key: *C*.
+
+C stands for Clear dataset filter.
+#+END_info
+
+** How to undo the Dataset Filter?                           :Filter:Dataset:
+If you are using the shortcut keys to filter the data, you can use shortcut key "Z" or "Ctrl + Z" to undo one step.
+
+#+BEGIN_info
+Shortcut Key: *Z* or *Ctrl + Z*.
+
+C stands for Clear dataset filter.
+#+END_info
+
+** How to know the current dataset filter?                   :Filter:Dataset:
+- The complete dataset filter text is shown in the Status Bar at the bottom of the screen. If the dataset filter text is truncated, you can hover the mouse cursor over it, a tip box will show all the text.
+- Or you can also click the filter icon on the toolbar, a dialog window "Dataset Filter" will show the complete dataset filter text. 
+
+** How to change the default logical operator from AND to OR while subsetting? :Filter:Dataset:
+Compound dataset subsets are built with the default logical operator AND. If you want to use the logical operator OR, please type in the shortcut key '(' to start, then all the subset conditions are linked with OR until you type in ')'. 
+
+** How to Subset on all the datasets in a library?           :Filter:Library:
+- Right click on the variable's value to be used in the WHERE clause.
+- Choose the WHERE clause from the context menu.
+
+#+BEGIN_info
+Tip:
+- You can only define one condition for the library filter.
+- Use caution with the Library filter. You may unknowingly be looking at a filtered dataset. If you aren't seeing what you expected, check for a Library filter in the Status Bar.
+#+END_info
+
+#+BEGIN_info
+Shortcut Key: *L*.
+
+L stands for Library filter.
+#+END_info
+
+** How to know the current library filter?                   :Filter:Library:
+The library filter is shown in the Status Bar at the bottom of the screen in red color.
+
+** How to Clear the library filter?                          :Filter:Library:
+Right click anywhere on the data and choose “Clear Library Filter” from the context menu.
+
+#+BEGIN_info
+Shortcut Key: *ALT + C*.
+
+C stands for Clear library filter.
+#+END_info
+
+** How to get frequencies of values of one variable?              :Frequency:
+From anywhere within that variable's column, right click and choose “Frequency” from the context menu. 
+
+#+BEGIN_info
+Tip:
+- The Frequency window will open and show the values of that variable in descending order of frequency. 
+- Clicking on the 'Frequency' header in that window will switch the order to ascending.
+- Clicking on the 'Value' header will display the values in alphabetical order.
+#+END_info
+
+#+BEGIN_info
+Shortcut Key: *F*.
+
+F stands for Frequency.
+#+END_info
+
+** How to get frequencies of values of multiple variables (crosstabulation)? :Frequency:
+- Holding Ctrl to select multiple cells. One varialbe, one cell.
+- Right click on one of the selected cells
+- Choose "Frequency" from the context menu
+
+#+BEGIN_info
+Tip:
+- You can also use the shortcut key *F* instead of context menus.
+- The crosstabulation bases on the variable orders in the dataset. If needed, please reorder the variables. Refer to [[*How to Reorder the variables from the Dataset window?][/How to Reorder the variables from the Dataset window?/]]
+
+#+END_info
+
+** How to get frequencies of distinct USUBJIDs of one variable?   :Frequency:
+From anywhere within that variable's column, right click and choose “Frequency (USUBJID)” from the context menu. 
+
+#+BEGIN_info
+Shortcut Key: *N*.
+
+N is the Number of distinct USUBJIDs.
+#+END_info
+
+** How to get frequencies of distinct USUBJIDs of multiple variables (crosstabulation)? :Frequency:
+- Holding Ctrl to select multiple cells. One varialbe, one cell.
+- Right click on one of the selected cells
+- Choose "Frequency (USUBJID)" from the context menu
+
+** How to use the Frequency window to help with subsetting? :Frequency:Filter:
+From within the Frequency window, right click and choose the appropriate filter.  
+
+#+BEGIN_info
+ Tip: if there are more than a few values, you may want to sort the frequency window by the Values to be able to quickly find the value you want to subset.  
+#+END_info
+
+** How to Hide/Unhide variables from the Variables window?        :Variables:
+- Uncheck and check the CheckBox of variables to hide and unhide variables respectively.
+- Or right click on the row/variable and choose "Hide/Unhide Variable" from the context menu.
+
+#+BEGIN_info
+Shortcut Key: *H*.
+
+H stands for Hide variable.
+#+END_info
+
+** How to Hide variables from the Dataset window?                   :Dataset:
+- Select one cell of the column/variable that you want to hide
+- Right click and choose "Hide Variable" from the context menu
+
+#+BEGIN_info
+Shortcut Key: *H*.
+
+H stands for Hide variable.
+#+END_info
+
+** How to Hide all variables from the Variables window?           :Variables:
+Right click any cell and choose "Hide All Variables" from the context menu.
+
+#+BEGIN_info
+Shortcut Key: *ALT + H*.
+
+H stands for Hide variable.
+#+END_info
+
+** How to Unhide all variables from the Variables window?         :Variables:
+Right click any cell and choose "Unhide All Variables" from the context menu.
+
+#+BEGIN_info
+Shortcut Key: *U*.
+
+U stands for Unhide all variables.
+#+END_info
+
+** How to Unhide all variables from the Dataset window?           :Dataset:
+Right click any cell and choose "Unhide Variables" from the context menu.
+
+#+BEGIN_info
+Shortcut Key: *U*.
+
+U stands for Unhide variables.
+#+END_info
+
+** How to Sort variable list?                                     :Variables:
+If there is no CheckBox column in the Variables window, you can sort the variables list. The Variables window will show the columns in the order they appear in the dataset. You can re-sort the variables list by any of the attributes shown by clicking on the header, but the variables will remain in the defined order in the dataset itself.
+
+** How to Go to a variable quickly from the Variables window?     :Variables:
+Once you've located the variable you want in the Variables list, right click on it and choose “Go to Variable” from the context menu.
+
+#+BEGIN_info
+Shortcut Key: *G*.
+
+G stands for Go to variable.
+#+END_info
+** How to look up a variable's metadata from the Dataset window?    :Dataset:
+Once you've located the variable in the Dataset window, use the shortcut key G or V to show this variable's metadata in the Variables window.
+
+#+BEGIN_info
+Shortcut Key: *G* or *V*.
+
+G stands for Go to variable metadata; V stands for Variable window.
+
+#+END_info
+
+** How to Reorder the variables from the Variables window?        :Variables:
+
+*** Shift Variable Up
+Right click on the row/variable and choose "Shift Variable Up", then the variable in the Variables window will shift up, and the variable in the Dataset window will shift left.
+
+#+BEGIN_info
+Shortcut Key: *ALT + Up*.
+#+END_info
+
+*** Shift Variable Down
+Right click on the row/variable and choose "Shift Variable Down", then the variable in the Variables window will shift down, and the variable in the Dataset window will shift right.
+
+#+BEGIN_info
+Shortcut Key: *ALT + Down*.
+#+END_info
+
+** How to Reorder the variables from the Dataset window?          :Variables:
+*** Shift Variable Left
+Right click on the column/variable and choose "Shift Variable Left", then the variable in the Dataset window will shift left, and the variable in the Variables window will shift up.
+
+#+BEGIN_info
+Shortcut Key: *ALT + Left*.
+#+END_info
+
+*** Shift Variable Right
+Right click on the column/variable and choose "Shift Variable Right", then the variable in the Dataset window will shift right, and the variable in the Variables window will shift up.
+
+#+BEGIN_info
+Shortcut Key: *ALT + Right*.
+#+END_info
+
+** How to show a specific window?                        :Window:
+If one of the docking windows you are looking for is not visible, choose View > Toolbars and Docking Windows > window from the ribbon. Available windows are: Workspace, Variables, Shortcut Keys and Frequency.
+
+** How to show the Variables window quickly?                         :Window:
+Use the shortcut key V. 
+#+BEGIN_info
+Shortcut Key: *V*.
+
+V stands for Variable window.
+#+END_info
+
+** How to dock and float a specific window?                          :Window:
+Once opened, you can toggle between docked/pinned and floating by double clicking on the window's title bar. Docked windows can be pinned to remain open or unpinned to automatically hide when you click outside of them. You can dock a window to any of the four edges of the main application window by dragging it to the edge where you want it to be.  
+
+#+BEGIN_info
+ Tip: send a floating window off-screen to another monitor if you are using an extended desktop. 
+#+END_info
+
+#+BEGIN_info
+ Tip: resize windows by grabbing a side and dragging it.
+#+END_info
+
+** How to view one dataset in two separated tabs?                    :Window:
+Datasets maybe viewed as tabs in a single window or may be separated into individual tabs. To separate them, grab the tab and move it till the page icon appears, then drag it down into the body of the dataset window. To move them back together into a single window, grab and drag it back to the dataset window of your choice. 
+
+** How to add a Library to the Workspace?                           :Library:
+Click on the 'Open' icon at the top left corner of the screen in the Standard menu, or use the keyboard shortcut CTRL+O, and then navigate to the library of your choice. Open a dataset. The entire library will now be available through the Workspace tab in SASHelper. 
+
+#+BEGIN_info
+Tip: If you already have the folder open in Windows Explorer, just copy and paste the address into the Open window.  
+#+END_info
+
+
+#+BEGIN_info
+Tip: Can't find the 'Open' icon?  Make sure the Standard toolbar is being displayed. Choose 'View> Toolbars and Docking Windows > Standard' from the Ribbon menu
+#+END_info
+** How to remove a Library from the Workspace?                      :Library:
+From the Workspace tab, right click on the library to be removed, and choose 'Remove' from the context menu.
+
+** How to Refresh a Library in the Workspace?                       :Library:
+From the Workspace tab, right click on the library to be refreshed, and choose 'Refresh' from the context menu.
+
+** How to Open a dataset?                                           :Dataset:
+Once you've registered a Library in the Workspace, you can simply double click on a dataset to open it.
+
+** How to Set libname for a library?                                :Library:
+- Right click on the library
+- Choose "Set Libname" and a dialog window "SAS Helper - Library Alias" will show
+- Enter the library name and click OK button
+
+** How to remove libname for a library?                             :Library:
+- Right click on the library
+- Choose "Set Libname" and a dialog window "SAS Helper - Library Alias" will show
+- Delete the library name and click OK button
+
+** How to Watch File Changes?                                       :Library:
+Right click on the library, then choose "Watch File Changes". Now you will find that this library will refresh automatically to reflect all the file changes of that folder.
+
+** How to Open New Dataset Automatically?                           :Library:
+While Watch File Changes is on, right click on the library, then choose "Open New Dataset Automatically". Now you will see the new created SAS datasets in this library will be opened by SASHelper automatically.
+
+** How to View Dataset Variables like SAS Universal Viewer?         :Library:
+- Right click on the library, then choose "View Dataset Variables" to toggle this feature on. 
+- Click on a dataset in this library, the Variables window will show this dataset's variables metadata.
+
+** How to enter the Library filter manually?                 :Filter:Library:
+Press the shortcut key "F5" to focus the Command ComboBox, then you can enter the filter condition there, such as /where usubjid = "CDISC01.100014"/.
+#+BEGIN_info
+Shortcut Key: *F5*.
+#+END_info
+
+** How to enter the Dataset filter manually?                 :Filter:Dataset:
+Press the shortcut key "F5" to focus the Command ComboBox, then you can enter the filter condition there, such as /if age = 66 and sex = "F"/
+
+#+BEGIN_info
+Shortcut Key: *F5*.
+#+END_info
+
+** How to find?                                                        :Find:
+- Click the Find ComboBox
+- Type in the keyword, such as "white"
+- Press Enter key or click the Find button on the right.
+
+#+BEGIN_info
+Shortcut Key: *Ctrl + F* or *Alt + S*.
+
+F stands for Find; S stands for Search.
+#+END_info
+
+** How to find next?                                   :Find:
+Use the shortcut key F3 or S.
+
+#+BEGIN_info
+Shortcut Key: *F3* or *S*.
+
+F3 is used by many applications; S stands for Search.
+
+#+END_info
+
+** How to find previous?                                               :Find:
+Use the shortcut key Shift + F3 or R.
+
+#+BEGIN_info
+Shortcut Key: *Shift + F3* or *R*.
+
+Shift + F3 is used by many applications; R stands for Reverse search.
+
+#+END_info
+
+** How to quickly locate a variable by finding the variable name?      :Find:
+If the feature "Locate the variable by searching variable name" is on, you can type in the variable name in the Find ComboBox to locate the variable in the dataset window quickly.
+
+** How to set a different font(name, size, etc) for the dataset window? :Option:
+- Click Edit -> Options
+- Click "Font" button from the dialog window "SAS Helper Options"
+
+** How to increase the font size quickly?       :Shortcuts:Dataset:
+Use the shortcut key Ctrl + +.
+
+#+BEGIN_info
+Shortcut Key: *Ctrl + +*.
+
++ stands for increase the font size.
+#+END_info
+
+** How to decrease the font size quickly?                 :Shortcuts:Dataset:
+Use the shortcut key Ctrl + -.
+
+#+BEGIN_info
+Shortcut Key: *Ctrl + -*.
+
+- stands for decrease the font size.
+#+END_info
+
+* Shortcut Keys 
+Use the Shortcut Keys window to show the list of shortcut keys
+** Dataset Window
+ 
+#+ATTR_HTML: :border 2 :rules all :frame border
+#+ATTR_LATEX: :align |l|p{6 cm}|p{4 cm}|l|p{8 cm}|
+| Action                           | Shortcut Keys    | Description                                                                                                 |
+| Find                             | Ctrl+F; Alt+S    | Find                                                                                                        |
+| Find Next                        | S; F3            | Find next.                                                                                                  |
+| Find Previous                    | R; Shift + F3    | Find Previous.                                                                                              |
+| Dataset Filter, In operator      | I                | Filter data with operator 'in'.                                                                             |
+| Dataset Filter, Equal            | D; =             | Filter data with operator =.                                                                                |
+| Dataset Filter, Uneuqal          | ^; ~             | Filter data with operator ^= or ~=.                                                                         |
+| Dataset Filter, Greater          | >                | Filter data with operator >.                                                                                |
+| Dataset Filter, Less             | <                | Filter data with operator <.                                                                                |
+| Dataset Filter, Greater or Equal | Alt + >          | Filter data with operator >=.                                                                               |
+| Dataset Filter, Less or Equal    | Alt + <          | Filter data with operator <=.                                                                               |
+| Dataset Filter, Undo             | Z; Ctrl+Z        | Undo one step of dataset filter.                                                                            |
+| Dataset Filter, Start OR         | (                | The logical operator changes to OR.                                                                         |
+| Dataset Filter, End OR           | )                | End the OR logical expression, and the logical operator changes to AND.                                     |
+| Clear Dataset Filter             | C                | Clear dataset level filter.                                                                                 |
+| Library Filter                   | L                | Filter data with operator =. It is library level.                                                           |
+| Clear Library Filter             | Alt+C            | Clear library level filter.                                                                                 |
+| Apply Library Filter             | Alt+L            | Apply library level filter.                                                                                 |
+| Frequency                        | F                | Get the frequency of the selected variable(s). Select multiple variables by holding down the Ctrl key.      |
+| Freq (USUBJID)                   | N                | Count distinct USUBJID of the selected variable(s). Select multiple variables by holding down the Ctrl key. |
+| Hide Variable                    | H                | Hide the focused variable.                                                                                  |
+| Hide All Variables               | ALT + H          | Hide all the variables.                                                                                     |
+| Unhide All Variables             | U                | Unhide all hidden variables.                                                                                |
+| Shift Variable Left              | ALT + Left       | Move the focused variable to the left.                                                                      |
+| Shift Variable Right             | ALT + Right      | Move the focused variable to the right.                                                                     |
+| Go to Variable                   | G; V             | Jump to the focused variable in Variables Window.                                                           |
+| Close Dataset                    | W; Ctrl + W      | Close the current dataset                                                                                   |
+| Close All Datasets               | Ctrl + Shift + W | Close all the opened datasets                                                                               |
+| Go to Observation                | Ctrl + G         | Go to any observation no you entered.                                                                       |
+| Increase the Font Size           | Ctrl + +         | Make the font bigger.                                                                                       |
+| Decrease the Font Size           | Ctrl + -         | Make the font smaller.                                                                                      |
+** Frequency Window
+#+ATTR_HTML: :border 2 :rules all :frame border
+#+ATTR_LATEX: :align |l|p{5 cm}|p{2.5 cm}|l|p{5 cm}|
+| Action                      | Shortcut Keys | Description                                       |
+| Dataset Filter, In operator | I             | Filter data with operator 'in'.                   |
+| Dataset Filter, Equal       | D; =          | Filter data with operator =.                      |
+| Clear Dataset Filter        | C             | Clear dataset level filter.                       |
+| Library Filter              | L             | Filter data with operator =. It is library level. |
+| Clear Library Filter        | Alt+C         | Clear library level filter.                       |
+
+** Variables Window
+#+ATTR_HTML: :border 2 :rules all :frame border
+#+ATTR_LATEX: :align |l|p{5 cm}|p{2.5 cm}|l|p{5 cm}|
+| Action               | Shortcut Keys | Description                                     |
+| Hide Variable        | H             | Hide the focused variable.                      |
+| Hide All Variables   | ALT + H       | Hide all the variables.                         |
+| Unhide All Variables | U             | Unhide all hidden variables.                    |
+| Shift Variable Left  | ALT + Up      | Move the focused variable to the left.          |
+| Shift Variable Right | ALT + Down    | Move the focused variable to the right.         |
+| Go to Variable       | G             | Jump to the focused variable in Dataset Window. |
+** Workspace Window
+#+ATTR_HTML: :border 2 :rules all :frame border
+#+ATTR_LATEX: :align |l|p{5 cm}|p{2.5 cm}|l|p{5 cm}|
+| Action       | Shortcut Keys | Description                |
+| Open Dataset | Enter         | Open the dataset selected. |
+
