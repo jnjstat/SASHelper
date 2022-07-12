@@ -182,7 +182,7 @@ h6 {
 .outline-text-2, .outline-text-3, .outline-text-4, .outline-text-5,
 .outline-3 > ul, /* for HTML export of Beamer slides */
 .outline-4 > ol, #text-footnotes {
-    margin-left: 100px;
+    margin-left: 0px;
 }
 
 li > .outline-text-5 {
