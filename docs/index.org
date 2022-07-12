@@ -2,6 +2,14 @@
 #+AUTHOR: Phyllis Wolf, Kenneth Yan
 #+TAGS: Window Library Filter Variables Frequency Find Sort Option Shortcuts Dataset
 #+SETUPFILE: bigblow-local.setup
+* Troubleshooting
+The following steps can resolve a lot of strange errors. Please have a try:
+** Run the command Regedit as below.
+[[./Pictures/Troubleshooting01.png]]
+** Select Computer\HKEY\under{}CURRENT\under{}USER\Software\JNJ AIT from RegEdit as below.
+[[./Pictures/Troubleshooting02.png]]
+** Right click and click Delete from the context menu to delete “JNJ AIT”
+** Restart SASHelper again.
 * Introduction
 SAS Helper is a convenient tool to help SAS users to view SAS datasets.
 ** Features

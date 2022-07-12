@@ -1,14 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2018-11-16 Fri 16:56 -->
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- 2022-07-11 Mon 18:23 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>SAS Helper User Manual</title>
-<meta name="generator" content="Org mode">
-<meta name="author" content="Phyllis Wolf, Kenneth Yan">
-<style type="text/css">
- <!--/*--><![CDATA[/*><!--*/
+<meta name="author" content="Phyllis Wolf, Kenneth Yan" />
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
   .title  { text-align: center;
              margin-bottom: .2em; }
   .subtitle { text-align: center;
@@ -29,8 +31,9 @@
   #postamble p, #preamble p { font-size: 90%; margin: .2em; }
   p.verse { margin-left: 3%; }
   pre {
-    border: 1px solid #ccc;
-    box-shadow: 3px 3px 3px #eee;
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
     padding: 8pt;
     font-family: monospace;
     overflow: auto;
@@ -38,22 +41,22 @@
   }
   pre.src {
     position: relative;
-    overflow: visible;
-    padding-top: 1.2em;
+    overflow: auto;
   }
   pre.src:before {
     display: none;
     position: absolute;
-    background-color: white;
-    top: -10px;
-    right: 10px;
+    top: -8px;
+    right: 12px;
     padding: 3px;
-    border: 1px solid black;
+    color: #555;
+    background-color: #f2f2f299;
   }
-  pre.src:hover:before { display: inline;}
+  pre.src:hover:before { display: inline; margin-top: 14px;}
   /* Languages per Org manual */
   pre.src-asymptote:before { content: 'Asymptote'; }
   pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
   pre.src-C:before { content: 'C'; }
   /* pre.src-C++ doesn't work in CSS */
   pre.src-clojure:before { content: 'Clojure'; }
@@ -159,6 +162,19 @@
   .footdef  { margin-bottom: 1em; }
   .figure { padding: 1em; }
   .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
   .inlinetask {
     padding: 10px;
     border: 2px solid gray;
@@ -176,7 +192,6 @@
   .org-info-js_search-highlight
     { background-color: #ffff00; color: #000000; font-weight: bold; }
   .org-svg { width: 90%; }
-  /*]]>*/-->
 </style>
 <link rel="stylesheet" type="text/css" href="styles/bigblow/css/htmlize.css"/>
 <link rel="stylesheet" type="text/css" href="styles/bigblow/css/bigblow.css"/>
@@ -188,52 +203,6 @@
 <script type="text/javascript" src="styles/bigblow/js/jquery.zclip.min.js"></script>
 <script type="text/javascript" src="styles/bigblow/js/bigblow.js"></script>
 <script type="text/javascript" src="styles/bigblow/js/hideshow.js"></script>
-<script type="text/javascript">
-/*
-@licstart  The following is the entire license notice for the
-JavaScript code in this tag.
-
-Copyright (C) 2012-2018 Free Software Foundation, Inc.
-
-The JavaScript code in this tag is free software: you can
-redistribute it and/or modify it under the terms of the GNU
-General Public License (GNU GPL) as published by the Free Software
-Foundation, either version 3 of the License, or (at your option)
-any later version.  The code is distributed WITHOUT ANY WARRANTY;
-without even the implied warranty of MERCHANTABILITY or FITNESS
-FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
-
-As additional permission under GNU GPL version 3 section 7, you
-may distribute non-source (e.g., minimized or compacted) forms of
-that code without the copy of the GNU GPL normally required by
-section 4, provided you include this license notice and a URL
-through which recipients can access the Corresponding Source.
-
-
-@licend  The above is the entire license notice
-for the JavaScript code in this tag.
-*/
-<!--/*--><![CDATA[/*><!--*/
- function CodeHighlightOn(elem, id)
- {
-   var target = document.getElementById(id);
-   if(null != target) {
-     elem.cacheClassElem = elem.className;
-     elem.cacheClassTarget = target.className;
-     target.className = "code-highlighted";
-     elem.className   = "code-highlighted";
-   }
- }
- function CodeHighlightOff(elem, id)
- {
-   var target = document.getElementById(id);
-   if(elem.cacheClassElem)
-     elem.className = elem.cacheClassElem;
-   if(elem.cacheClassTarget)
-     target.className = elem.cacheClassTarget;
- }
-/*]]>*///-->
-</script>
 <script type="text/x-mathjax-config">
     MathJax.Hub.Config({
         displayAlign: "center",
@@ -254,184 +223,224 @@ for the JavaScript code in this tag.
              }
 });
 </script>
-<script type="text/javascript"
-        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
 </head>
 <body>
-<div id="content">
-<header>
+<div id="content" class="content">
 <h1 class="title">SAS Helper User Manual</h1>
-</header><nav id="table-of-contents">
+<div id="table-of-contents" role="doc-toc">
 <h2>Table of Contents</h2>
-<div id="text-table-of-contents">
+<div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org3e5eb9a">1. Introduction</a>
+<li><a href="#org8a80cc0">1. Troubleshooting</a>
 <ul>
-<li><a href="#org8d6f257">1.1. Features</a></li>
-<li><a href="#org4617de2">1.2. Prerequisite</a></li>
-<li><a href="#orgda5fa68">1.3. Support Information</a></li>
-<li><a href="#org885a23b">1.4. SASHelper user interface</a>
+<li><a href="#orgd8a49c9">1.1. Run the command Regedit as below.</a></li>
+<li><a href="#orgbb54f3d">1.2. Select Computer\HKEY_CURRENT_USER\Software\JNJ AIT from RegEdit as below.</a></li>
+<li><a href="#orgee31717">1.3. Right click and click Delete from the context menu to delete “JNJ AIT”</a></li>
+<li><a href="#org9f90e79">1.4. Restart SASHelper again.</a></li>
+</ul>
+</li>
+<li><a href="#org4e54332">2. Introduction</a>
 <ul>
-<li><a href="#orgbcdb7ca">1.4.1. The default layout</a></li>
-<li><a href="#org1107d93">1.4.2. View variables layout</a></li>
-<li><a href="#org3ce587d">1.4.3. View frequencies layout</a></li>
-<li><a href="#orge359e56">1.4.4. View shortcut keys layout</a></li>
-<li><a href="#org3508e04">1.4.5. Options dialog window</a></li>
+<li><a href="#orgc77958b">2.1. Features</a></li>
+<li><a href="#org0ae5685">2.2. Prerequisite</a></li>
+<li><a href="#orgf28eff3">2.3. Support Information</a></li>
+<li><a href="#org4bb40aa">2.4. SASHelper user interface</a>
+<ul>
+<li><a href="#orgc4a8460">2.4.1. The default layout</a></li>
+<li><a href="#org869bb05">2.4.2. View variables layout</a></li>
+<li><a href="#org061ea20">2.4.3. View frequencies layout</a></li>
+<li><a href="#orgff9851d">2.4.4. View shortcut keys layout</a></li>
+<li><a href="#org85858bf">2.4.5. Options dialog window</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#org872368c">2. Tutorial</a>
+<li><a href="#org87a6d00">3. Tutorial</a>
 <ul>
-<li><a href="#orgecea6bf">2.1. Open SASHelper.exe</a></li>
-<li><a href="#org223bbff">2.2. Open a SAS dataset c:/SASHelper/Docs/Samples/SDTM/dm.sas7bdat</a></li>
-<li><a href="#orgd1c682d">2.3. Set an alias "DemoSDTM" for the library c:/SASHelper/Docs/Samples/SDTM/</a>
+<li><a href="#org29d2bde">3.1. Open SASHelper.exe</a></li>
+<li><a href="#org4ed62ad">3.2. Open a SAS dataset c:/SASHelper/Docs/Samples/SDTM/dm.sas7bdat</a></li>
+<li><a href="#orgf153bce">3.3. Set an alias "DemoSDTM" for the library c:/SASHelper/Docs/Samples/SDTM/</a>
 <ul>
-<li><a href="#orgb076434">2.3.1. Right click on "c:\SASHelper\Docs\Samples\SDTM\" and then click "Set Libname"</a></li>
-<li><a href="#org3942ce1">2.3.2. Type in the libname "DemoSDTM", and click "OK" button.</a></li>
+<li><a href="#org7ecb30a">3.3.1. Right click on "c:\SASHelper\Docs\Samples\SDTM\" and then click "Set Libname"</a></li>
+<li><a href="#orgcbbf1ea">3.3.2. Type in the libname "DemoSDTM", and click "OK" button.</a></li>
 </ul>
 </li>
-<li><a href="#org88b5c3b">2.4. Click the "Auto Hide" button of the Workspace window</a></li>
-<li><a href="#org69740b6">2.5. Move the mouse cursor on the tab "Variables - dm" on the right side and hover.</a></li>
-<li><a href="#org8561418">2.6. Dock the Variables window</a>
+<li><a href="#org358f9cc">3.4. Click the "Auto Hide" button of the Workspace window</a></li>
+<li><a href="#orge53a054">3.5. Move the mouse cursor on the tab "Variables - dm" on the right side and hover.</a></li>
+<li><a href="#orga83f811">3.6. Dock the Variables window</a>
 <ul>
-<li><a href="#orga39cbd1">2.6.1. Click the "Auto Hide" button of the Variables window</a></li>
-<li><a href="#org247e2b2">2.6.2. You can see the Variables window is docked.</a></li>
+<li><a href="#org434d416">3.6.1. Click the "Auto Hide" button of the Variables window</a></li>
+<li><a href="#orgb5f0c0b">3.6.2. You can see the Variables window is docked.</a></li>
 </ul>
 </li>
-<li><a href="#orga9e5a79">2.7. Click any cell of the Dataset window and make the Dataset window get focus</a></li>
-<li><a href="#org115415a">2.8. Right click on any cell of the column USUBJID and click "Hide Variable"</a></li>
-<li><a href="#orgf2fbc22">2.9. Click any cell of the Variables window and make the Variables window get focus</a></li>
-<li><a href="#orgc0daf49">2.10. Click the checkbox on the row USUBJID</a></li>
-<li><a href="#orgda814e8">2.11. Let's Hide All Variables</a>
+<li><a href="#org8e7a9a2">3.7. Click any cell of the Dataset window and make the Dataset window get focus</a></li>
+<li><a href="#org2a48b53">3.8. Right click on any cell of the column USUBJID and click "Hide Variable"</a></li>
+<li><a href="#orgd8e500f">3.9. Click any cell of the Variables window and make the Variables window get focus</a></li>
+<li><a href="#orgafa9529">3.10. Click the checkbox on the row USUBJID</a></li>
+<li><a href="#org4424c22">3.11. Let's Hide All Variables</a>
 <ul>
-<li><a href="#org0f15ca1">2.11.1. Right click on any cell of the Variables window, and click "Hide All Variables"</a></li>
-<li><a href="#org3746923">2.11.2. You will see that all the variables are hidden.</a></li>
+<li><a href="#orgd720c47">3.11.1. Right click on any cell of the Variables window, and click "Hide All Variables"</a></li>
+<li><a href="#org73f9d16">3.11.2. You will see that all the variables are hidden.</a></li>
 </ul>
 </li>
-<li><a href="#org33a05ce">2.12. Click the checkbox to show the variables USUBJID, AGE, SEX, and ARM</a></li>
-<li><a href="#org2f40674">2.13. Click any cell of the Dataset window and make the Dataset window get focus</a></li>
-<li><a href="#orgf27e118">2.14. Let's calculate the Frequency of SEX by context menu</a>
+<li><a href="#orge5a5933">3.12. Click the checkbox to show the variables USUBJID, AGE, SEX, and ARM</a></li>
+<li><a href="#org923e596">3.13. Click any cell of the Dataset window and make the Dataset window get focus</a></li>
+<li><a href="#org295cb56">3.14. Let's calculate the Frequency of SEX by context menu</a>
 <ul>
-<li><a href="#orge1a1111">2.14.1. Right click any cell of the column SEX, and click "Frequency"</a></li>
-<li><a href="#org3b3890c">2.14.2. Now you will see the frequencies of SEX on right side Frequency window.</a></li>
+<li><a href="#orge15070d">3.14.1. Right click any cell of the column SEX, and click "Frequency"</a></li>
+<li><a href="#orgfbb1ac3">3.14.2. Now you will see the frequencies of SEX on right side Frequency window.</a></li>
 </ul>
 </li>
-<li><a href="#org6034af0">2.15. Let's calculate the Frequency of ARM by shortcut key 'F'</a>
+<li><a href="#org141551c">3.15. Let's calculate the Frequency of ARM by shortcut key 'F'</a>
 <ul>
-<li><a href="#org120e7ba">2.15.1. Click any cell of the column ARM, and press the key 'F' on the keyboard</a></li>
-<li><a href="#org59e1343">2.15.2. Now you will see the frequencies of ARM on right side Frequency window.</a></li>
+<li><a href="#org7fbe782">3.15.1. Click any cell of the column ARM, and press the key 'F' on the keyboard</a></li>
+<li><a href="#orgc8e39bd">3.15.2. Now you will see the frequencies of ARM on right side Frequency window.</a></li>
 </ul>
 </li>
-<li><a href="#org80b0dcf">2.16. Crosstabulation</a>
+<li><a href="#org1ec6aa4">3.16. Crosstabulation</a>
 <ul>
-<li><a href="#orgdaa92d4">2.16.1. Hold Ctrl key, click any cell of the column SEX, then click any cell of the column ARM</a></li>
-<li><a href="#org99634a2">2.16.2. press the key 'F' on the keyboard</a></li>
+<li><a href="#org7fd2a66">3.16.1. Hold Ctrl key, click any cell of the column SEX, then click any cell of the column ARM</a></li>
+<li><a href="#orge9b3af8">3.16.2. press the key 'F' on the keyboard</a></li>
 </ul>
 </li>
-<li><a href="#org5542920">2.17. Let's open another SAS dataset</a>
+<li><a href="#org294cee2">3.17. Let's open another SAS dataset</a>
 <ul>
-<li><a href="#org7f65ea7">2.17.1. Click "Workspace" on the left side</a></li>
-<li><a href="#org2aead85">2.17.2. Double click "ae.sas7bdat"</a></li>
+<li><a href="#orgdaad764">3.17.1. Click "Workspace" on the left side</a></li>
+<li><a href="#org6d1cb95">3.17.2. Double click "ae.sas7bdat"</a></li>
 </ul>
 </li>
-<li><a href="#orgbb21abd">2.18. Click any cell of the Dataset window with the title "ae.sas7bdat" and make it get focus</a></li>
-<li><a href="#org51759eb">2.19. Let's calculate the "Frequency(USUBJID)" of USUBJID</a>
+<li><a href="#orge8415cc">3.18. Click any cell of the Dataset window with the title "ae.sas7bdat" and make it get focus</a></li>
+<li><a href="#org38e254b">3.19. Let's calculate the "Frequency(USUBJID)" of USUBJID</a>
 <ul>
-<li><a href="#org65e2492">2.19.1. Right click any cell of the column USUBJID and click "Frequency(USUBJID)"</a></li>
-<li><a href="#orge7ca2bd">2.19.2. Now you will see the count of distict USUBJID of USUBJID on right side Frequency window.</a></li>
+<li><a href="#org8299543">3.19.1. Right click any cell of the column USUBJID and click "Frequency(USUBJID)"</a></li>
+<li><a href="#org9205af7">3.19.2. Now you will see the count of distict USUBJID of USUBJID on right side Frequency window.</a></li>
 </ul>
 </li>
-<li><a href="#org0a448cb">2.20. Try again to right click any cell of the column STUDYID and click "Frequency(USUBJID)"</a></li>
-<li><a href="#org18fea03">2.21. Let's try the Find feature</a>
+<li><a href="#orgc4004dd">3.20. Try again to right click any cell of the column STUDYID and click "Frequency(USUBJID)"</a></li>
+<li><a href="#org27a7017">3.21. Let's try the Find feature</a>
 <ul>
-<li><a href="#org2b4bb04">2.21.1. Press shortcut key "Ctrl + F", enter "Vomiting" in the Find ComboBox and press "Enter" key</a></li>
-<li><a href="#org2ee4bc0">2.21.2. Press "F3" to find next one, and you will find that the Find feature is case insensitive.</a></li>
-<li><a href="#org361f8e3">2.21.3. Let's try to enter the filter manually</a></li>
+<li><a href="#org4aad880">3.21.1. Press shortcut key "Ctrl + F", enter "Vomiting" in the Find ComboBox and press "Enter" key</a></li>
+<li><a href="#org6227d3d">3.21.2. Press "F3" to find next one, and you will find that the Find feature is case insensitive.</a></li>
+<li><a href="#orgc3ecd04">3.21.3. Let's try to enter the filter manually</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#org120bda1">3. How-to Guide</a>
+<li><a href="#org0643444">4. How-to Guide</a>
 <ul>
-<li><a href="#org223927a">3.1. How to subset a single dataset?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Filter">Filter</span>&#xa0;<span class="Dataset">Dataset</span></span></a></li>
-<li><a href="#orgc9d14f7">3.2. How to Clear the dataset filter?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Filter">Filter</span>&#xa0;<span class="Dataset">Dataset</span></span></a></li>
-<li><a href="#orgd1bfd5a">3.3. How to undo the Dataset Filter?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Filter">Filter</span>&#xa0;<span class="Dataset">Dataset</span></span></a></li>
-<li><a href="#org6cb6799">3.4. How to know the current dataset filter?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Filter">Filter</span>&#xa0;<span class="Dataset">Dataset</span></span></a></li>
-<li><a href="#orgd146ffc">3.5. How to change the default logical operator from AND to OR while subsetting?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Filter">Filter</span>&#xa0;<span class="Dataset">Dataset</span></span></a></li>
-<li><a href="#org4d3a503">3.6. How to Subset on all the datasets in a library?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Filter">Filter</span>&#xa0;<span class="Library">Library</span></span></a></li>
-<li><a href="#orgeba8827">3.7. How to know the current library filter?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Filter">Filter</span>&#xa0;<span class="Library">Library</span></span></a></li>
-<li><a href="#orgff300c6">3.8. How to Clear the library filter?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Filter">Filter</span>&#xa0;<span class="Library">Library</span></span></a></li>
-<li><a href="#org456d01e">3.9. How to get frequencies of values of one variable?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Frequency">Frequency</span></span></a></li>
-<li><a href="#org5edd35e">3.10. How to get frequencies of values of multiple variables (crosstabulation)?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Frequency">Frequency</span></span></a></li>
-<li><a href="#org6a76623">3.11. How to get frequencies of distinct USUBJIDs of one variable?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Frequency">Frequency</span></span></a></li>
-<li><a href="#org30a7943">3.12. How to get frequencies of distinct USUBJIDs of multiple variables (crosstabulation)?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Frequency">Frequency</span></span></a></li>
-<li><a href="#org41eaaf1">3.13. How to use the Frequency window to help with subsetting?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Frequency">Frequency</span>&#xa0;<span class="Filter">Filter</span></span></a></li>
-<li><a href="#orgf1a57f4">3.14. How to Hide/Unhide variables from the Variables window?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Variables">Variables</span></span></a></li>
-<li><a href="#org8be22fd">3.15. How to Hide variables from the Dataset window?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Dataset">Dataset</span></span></a></li>
-<li><a href="#org2697373">3.16. How to Hide all variables from the Variables window?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Variables">Variables</span></span></a></li>
-<li><a href="#org1468697">3.17. How to Unhide all variables from the Variables window?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Variables">Variables</span></span></a></li>
-<li><a href="#org3205fca">3.18. How to Unhide all variables from the Dataset window?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Dataset">Dataset</span></span></a></li>
-<li><a href="#org7786a22">3.19. How to Sort variable list?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Variables">Variables</span></span></a></li>
-<li><a href="#org5f30a15">3.20. How to Go to a variable quickly from the Variables window?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Variables">Variables</span></span></a></li>
-<li><a href="#orge286872">3.21. How to look up a variable's metadata from the Dataset window?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Dataset">Dataset</span></span></a></li>
-<li><a href="#org9d3bc98">3.22. How to Reorder the variables from the Variables window?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Variables">Variables</span></span></a>
+<li><a href="#org154f3e5">4.1. How to subset a single dataset?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Filter">Filter</span>&#xa0;<span class="Dataset">Dataset</span></span></a></li>
+<li><a href="#orgcd4140e">4.2. How to Clear the dataset filter?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Filter">Filter</span>&#xa0;<span class="Dataset">Dataset</span></span></a></li>
+<li><a href="#org8bca89f">4.3. How to undo the Dataset Filter?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Filter">Filter</span>&#xa0;<span class="Dataset">Dataset</span></span></a></li>
+<li><a href="#org16056ad">4.4. How to know the current dataset filter?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Filter">Filter</span>&#xa0;<span class="Dataset">Dataset</span></span></a></li>
+<li><a href="#orgcc07c6a">4.5. How to change the default logical operator from AND to OR while subsetting?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Filter">Filter</span>&#xa0;<span class="Dataset">Dataset</span></span></a></li>
+<li><a href="#orga205cd3">4.6. How to Subset on all the datasets in a library?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Filter">Filter</span>&#xa0;<span class="Library">Library</span></span></a></li>
+<li><a href="#orgef18f18">4.7. How to know the current library filter?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Filter">Filter</span>&#xa0;<span class="Library">Library</span></span></a></li>
+<li><a href="#org4bfcee2">4.8. How to Clear the library filter?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Filter">Filter</span>&#xa0;<span class="Library">Library</span></span></a></li>
+<li><a href="#org1a99cf8">4.9. How to get frequencies of values of one variable?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Frequency">Frequency</span></span></a></li>
+<li><a href="#org0913626">4.10. How to get frequencies of values of multiple variables (crosstabulation)?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Frequency">Frequency</span></span></a></li>
+<li><a href="#orgceb0bdc">4.11. How to get frequencies of distinct USUBJIDs of one variable?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Frequency">Frequency</span></span></a></li>
+<li><a href="#org643f4de">4.12. How to get frequencies of distinct USUBJIDs of multiple variables (crosstabulation)?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Frequency">Frequency</span></span></a></li>
+<li><a href="#org28456b9">4.13. How to use the Frequency window to help with subsetting?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Frequency">Frequency</span>&#xa0;<span class="Filter">Filter</span></span></a></li>
+<li><a href="#org5faf7dd">4.14. How to Hide/Unhide variables from the Variables window?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Variables">Variables</span></span></a></li>
+<li><a href="#orgc249b7f">4.15. How to Hide variables from the Dataset window?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Dataset">Dataset</span></span></a></li>
+<li><a href="#org3a84021">4.16. How to Hide all variables from the Variables window?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Variables">Variables</span></span></a></li>
+<li><a href="#orgd297cf2">4.17. How to Unhide all variables from the Variables window?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Variables">Variables</span></span></a></li>
+<li><a href="#org328f3ba">4.18. How to Unhide all variables from the Dataset window?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Dataset">Dataset</span></span></a></li>
+<li><a href="#org4f0df12">4.19. How to Sort variable list?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Variables">Variables</span></span></a></li>
+<li><a href="#org931b75e">4.20. How to Go to a variable quickly from the Variables window?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Variables">Variables</span></span></a></li>
+<li><a href="#org55b043f">4.21. How to look up a variable's metadata from the Dataset window?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Dataset">Dataset</span></span></a></li>
+<li><a href="#orge548745">4.22. How to Reorder the variables from the Variables window?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Variables">Variables</span></span></a>
 <ul>
-<li><a href="#org51fd750">3.22.1. Shift Variable Up</a></li>
-<li><a href="#orge16f23a">3.22.2. Shift Variable Down</a></li>
+<li><a href="#org734461c">4.22.1. Shift Variable Up</a></li>
+<li><a href="#orge04353f">4.22.2. Shift Variable Down</a></li>
 </ul>
 </li>
-<li><a href="#org0e6f9e2">3.23. How to Reorder the variables from the Dataset window?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Variables">Variables</span></span></a>
+<li><a href="#org361aeda">4.23. How to Reorder the variables from the Dataset window?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Variables">Variables</span></span></a>
 <ul>
-<li><a href="#orgc8535c1">3.23.1. Shift Variable Left</a></li>
-<li><a href="#orgbf45012">3.23.2. Shift Variable Right</a></li>
+<li><a href="#org9395ae5">4.23.1. Shift Variable Left</a></li>
+<li><a href="#orgf76f7cd">4.23.2. Shift Variable Right</a></li>
 </ul>
 </li>
-<li><a href="#orgc38eddb">3.24. How to show a specific window?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Window">Window</span></span></a></li>
-<li><a href="#org3c5a6b6">3.25. How to show the Variables window quickly?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Window">Window</span></span></a></li>
-<li><a href="#org21bfed8">3.26. How to dock and float a specific window?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Window">Window</span></span></a></li>
-<li><a href="#orgc48eaee">3.27. How to view one dataset in two separated tabs?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Window">Window</span></span></a></li>
-<li><a href="#org1a5e5aa">3.28. How to add a Library to the Workspace?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Library">Library</span></span></a></li>
-<li><a href="#orgc3578f8">3.29. How to remove a Library from the Workspace?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Library">Library</span></span></a></li>
-<li><a href="#org97dc398">3.30. How to Refresh a Library in the Workspace?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Library">Library</span></span></a></li>
-<li><a href="#orgf3afbc0">3.31. How to Open a dataset?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Dataset">Dataset</span></span></a></li>
-<li><a href="#org949602a">3.32. How to Set libname for a library?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Library">Library</span></span></a></li>
-<li><a href="#org1aa5d76">3.33. How to remove libname for a library?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Library">Library</span></span></a></li>
-<li><a href="#org5c8af22">3.34. How to Watch File Changes?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Library">Library</span></span></a></li>
-<li><a href="#org3fd116d">3.35. How to Open New Dataset Automatically?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Library">Library</span></span></a></li>
-<li><a href="#org3774b4c">3.36. How to View Dataset Variables like SAS Universal Viewer?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Library">Library</span></span></a></li>
-<li><a href="#org3d5d619">3.37. How to enter the Library filter manually?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Filter">Filter</span>&#xa0;<span class="Library">Library</span></span></a></li>
-<li><a href="#org345e8ac">3.38. How to enter the Dataset filter manually?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Filter">Filter</span>&#xa0;<span class="Dataset">Dataset</span></span></a></li>
-<li><a href="#orge1c0fed">3.39. How to find?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Find">Find</span></span></a></li>
-<li><a href="#org9e5eed9">3.40. How to find next?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Find">Find</span></span></a></li>
-<li><a href="#orged1a29d">3.41. How to find previous?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Find">Find</span></span></a></li>
-<li><a href="#org846a505">3.42. How to quickly locate a variable by finding the variable name?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Find">Find</span></span></a></li>
-<li><a href="#orgb2e12cb">3.43. How to set a different font(name, size, etc) for the dataset window?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Option">Option</span></span></a></li>
-<li><a href="#org815f62a">3.44. How to increase the font size quickly?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Shortcuts">Shortcuts</span>&#xa0;<span class="Dataset">Dataset</span></span></a></li>
-<li><a href="#org0a7b177">3.45. How to decrease the font size quickly?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Shortcuts">Shortcuts</span>&#xa0;<span class="Dataset">Dataset</span></span></a></li>
+<li><a href="#org9ad0961">4.24. How to show a specific window?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Window">Window</span></span></a></li>
+<li><a href="#orgc754d76">4.25. How to show the Variables window quickly?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Window">Window</span></span></a></li>
+<li><a href="#org55b1a3e">4.26. How to dock and float a specific window?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Window">Window</span></span></a></li>
+<li><a href="#org5020055">4.27. How to view one dataset in two separated tabs?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Window">Window</span></span></a></li>
+<li><a href="#org0ed39b5">4.28. How to add a Library to the Workspace?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Library">Library</span></span></a></li>
+<li><a href="#org7a21003">4.29. How to remove a Library from the Workspace?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Library">Library</span></span></a></li>
+<li><a href="#orgbd8fc3f">4.30. How to Refresh a Library in the Workspace?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Library">Library</span></span></a></li>
+<li><a href="#org8651447">4.31. How to Open a dataset?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Dataset">Dataset</span></span></a></li>
+<li><a href="#org9b9b7c6">4.32. How to Set libname for a library?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Library">Library</span></span></a></li>
+<li><a href="#org1b3b600">4.33. How to remove libname for a library?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Library">Library</span></span></a></li>
+<li><a href="#org635a8eb">4.34. How to Watch File Changes?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Library">Library</span></span></a></li>
+<li><a href="#org2984196">4.35. How to Open New Dataset Automatically?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Library">Library</span></span></a></li>
+<li><a href="#org0976dab">4.36. How to View Dataset Variables like SAS Universal Viewer?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Library">Library</span></span></a></li>
+<li><a href="#orgfff7446">4.37. How to enter the Library filter manually?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Filter">Filter</span>&#xa0;<span class="Library">Library</span></span></a></li>
+<li><a href="#org1201f87">4.38. How to enter the Dataset filter manually?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Filter">Filter</span>&#xa0;<span class="Dataset">Dataset</span></span></a></li>
+<li><a href="#org38044a0">4.39. How to find?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Find">Find</span></span></a></li>
+<li><a href="#org8d15ea1">4.40. How to find next?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Find">Find</span></span></a></li>
+<li><a href="#org8e623fb">4.41. How to find previous?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Find">Find</span></span></a></li>
+<li><a href="#org1f60a8a">4.42. How to quickly locate a variable by finding the variable name?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Find">Find</span></span></a></li>
+<li><a href="#orgcfb484e">4.43. How to set a different font(name, size, etc) for the dataset window?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Option">Option</span></span></a></li>
+<li><a href="#org3374d7f">4.44. How to increase the font size quickly?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Shortcuts">Shortcuts</span>&#xa0;<span class="Dataset">Dataset</span></span></a></li>
+<li><a href="#org7272797">4.45. How to decrease the font size quickly?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Shortcuts">Shortcuts</span>&#xa0;<span class="Dataset">Dataset</span></span></a></li>
 </ul>
 </li>
-<li><a href="#org149d990">4. Shortcut Keys</a>
+<li><a href="#orga83f93b">5. Shortcut Keys</a>
 <ul>
-<li><a href="#orgb538968">4.1. Dataset Window</a></li>
-<li><a href="#org05bb3c5">4.2. Frequency Window</a></li>
-<li><a href="#org6b07ef6">4.3. Variables Window</a></li>
-<li><a href="#org9e5ef26">4.4. Workspace Window</a></li>
+<li><a href="#org431abf4">5.1. Dataset Window</a></li>
+<li><a href="#org69dacc9">5.2. Frequency Window</a></li>
+<li><a href="#orgabb0b73">5.3. Variables Window</a></li>
+<li><a href="#orgb552fed">5.4. Workspace Window</a></li>
 </ul>
 </li>
 </ul>
 </div>
-</nav>
-<div id="outline-container-org3e5eb9a" class="outline-2">
-<h2 id="org3e5eb9a"><span class="section-number-2">1</span> Introduction</h2>
+</div>
+<div id="outline-container-org8a80cc0" class="outline-2">
+<h2 id="org8a80cc0"><span class="section-number-2">1.</span> Troubleshooting</h2>
 <div class="outline-text-2" id="text-1">
+<p>
+The following steps can resolve a lot of strange errors. Please have a try:
+</p>
+</div>
+<div id="outline-container-orgd8a49c9" class="outline-3">
+<h3 id="orgd8a49c9"><span class="section-number-3">1.1.</span> Run the command Regedit as below.</h3>
+<div class="outline-text-3" id="text-1-1">
+
+<div id="orgc0db675" class="figure">
+<p><img src="./Pictures/Troubleshooting01.png" alt="Troubleshooting01.png" />
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-orgbb54f3d" class="outline-3">
+<h3 id="orgbb54f3d"><span class="section-number-3">1.2.</span> Select Computer\HKEY_CURRENT_USER\Software\JNJ AIT from RegEdit as below.</h3>
+<div class="outline-text-3" id="text-1-2">
+
+<div id="orgd7f9d0b" class="figure">
+<p><img src="./Pictures/Troubleshooting02.png" alt="Troubleshooting02.png" />
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-orgee31717" class="outline-3">
+<h3 id="orgee31717"><span class="section-number-3">1.3.</span> Right click and click Delete from the context menu to delete “JNJ AIT”</h3>
+</div>
+<div id="outline-container-org9f90e79" class="outline-3">
+<h3 id="org9f90e79"><span class="section-number-3">1.4.</span> Restart SASHelper again.</h3>
+</div>
+</div>
+<div id="outline-container-org4e54332" class="outline-2">
+<h2 id="org4e54332"><span class="section-number-2">2.</span> Introduction</h2>
+<div class="outline-text-2" id="text-2">
 <p>
 SAS Helper is a convenient tool to help SAS users to view SAS datasets.
 </p>
 </div>
-<div id="outline-container-org8d6f257" class="outline-3">
-<h3 id="org8d6f257"><span class="section-number-3">1.1</span> Features</h3>
-<div class="outline-text-3" id="text-1-1">
+<div id="outline-container-orgc77958b" class="outline-3">
+<h3 id="orgc77958b"><span class="section-number-3">2.1.</span> Features</h3>
+<div class="outline-text-3" id="text-2-1">
 <ul class="org-ul">
 <li>High performance and much faster than SAS Universal Viewer</li>
 <li>Flexible and efficient dataset filter system, three ways to filter data:
@@ -456,21 +465,21 @@ SAS Helper is a convenient tool to help SAS users to view SAS datasets.
 </div>
 </div>
 
-<div id="outline-container-org4617de2" class="outline-3">
-<h3 id="org4617de2"><span class="section-number-3">1.2</span> Prerequisite</h3>
-<div class="outline-text-3" id="text-1-2">
+<div id="outline-container-org0ae5685" class="outline-3">
+<h3 id="org0ae5685"><span class="section-number-3">2.2.</span> Prerequisite</h3>
+<div class="outline-text-3" id="text-2-2">
 <ul class="org-ul">
 <li>OS: 64 bits Windows system, such as Windows 10, Windows 7, and Windows Server 2008 R2 Enterprise.</li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-orgda5fa68" class="outline-3">
-<h3 id="orgda5fa68"><span class="section-number-3">1.3</span> Support Information</h3>
-<div class="outline-text-3" id="text-1-3">
-<div class="info">
+<div id="outline-container-orgf28eff3" class="outline-3">
+<h3 id="orgf28eff3"><span class="section-number-3">2.3.</span> Support Information</h3>
+<div class="outline-text-3" id="text-2-3">
+<div class="info" id="org3e6c84a">
 <p>
-Please write Email to: <br>
+Please write Email to: <br />
 </p>
 
 <p>
@@ -481,456 +490,456 @@ Please write Email to: <br>
 </div>
 </div>
 
-<div id="outline-container-org885a23b" class="outline-3">
-<h3 id="org885a23b"><span class="section-number-3">1.4</span> SASHelper user interface</h3>
-<div class="outline-text-3" id="text-1-4">
+<div id="outline-container-org4bb40aa" class="outline-3">
+<h3 id="org4bb40aa"><span class="section-number-3">2.4.</span> SASHelper user interface</h3>
+<div class="outline-text-3" id="text-2-4">
 </div>
-<div id="outline-container-orgbcdb7ca" class="outline-4">
-<h4 id="orgbcdb7ca"><span class="section-number-4">1.4.1</span> The default layout</h4>
-<div class="outline-text-4" id="text-1-4-1">
+<div id="outline-container-orgc4a8460" class="outline-4">
+<h4 id="orgc4a8460"><span class="section-number-4">2.4.1.</span> The default layout</h4>
+<div class="outline-text-4" id="text-2-4-1">
 
-<figure>
-<img src="./Pictures/LayoutDefault.png" alt="LayoutDefault.png">
-
-</figure>
-</div>
-</div>
-<div id="outline-container-org1107d93" class="outline-4">
-<h4 id="org1107d93"><span class="section-number-4">1.4.2</span> View variables layout</h4>
-<div class="outline-text-4" id="text-1-4-2">
-
-<figure>
-<img src="./Pictures/LayoutViewVar.png" alt="LayoutViewVar.png">
-
-</figure>
+<div id="org5d2355a" class="figure">
+<p><img src="./Pictures/LayoutDefault.png" alt="LayoutDefault.png" />
+</p>
 </div>
 </div>
-
-<div id="outline-container-org3ce587d" class="outline-4">
-<h4 id="org3ce587d"><span class="section-number-4">1.4.3</span> View frequencies layout</h4>
-<div class="outline-text-4" id="text-1-4-3">
-
-<figure>
-<img src="./Pictures/LayoutViewFreq.png" alt="LayoutViewFreq.png">
-
-</figure>
 </div>
-</div>
+<div id="outline-container-org869bb05" class="outline-4">
+<h4 id="org869bb05"><span class="section-number-4">2.4.2.</span> View variables layout</h4>
+<div class="outline-text-4" id="text-2-4-2">
 
-<div id="outline-container-orge359e56" class="outline-4">
-<h4 id="orge359e56"><span class="section-number-4">1.4.4</span> View shortcut keys layout</h4>
-<div class="outline-text-4" id="text-1-4-4">
-
-<figure>
-<img src="./Pictures/LayoutShortcutKeys.png" alt="LayoutShortcutKeys.png">
-
-</figure>
-</div>
-</div>
-
-<div id="outline-container-org3508e04" class="outline-4">
-<h4 id="org3508e04"><span class="section-number-4">1.4.5</span> Options dialog window</h4>
-<div class="outline-text-4" id="text-1-4-5">
-
-<figure>
-<img src="./Pictures/LayoutOptions.png" alt="LayoutOptions.png">
-
-</figure>
-</div>
+<div id="orgf946f1a" class="figure">
+<p><img src="./Pictures/LayoutViewVar.png" alt="LayoutViewVar.png" />
+</p>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org872368c" class="outline-2">
-<h2 id="org872368c"><span class="section-number-2">2</span> Tutorial</h2>
-<div class="outline-text-2" id="text-2">
+<div id="outline-container-org061ea20" class="outline-4">
+<h4 id="org061ea20"><span class="section-number-4">2.4.3.</span> View frequencies layout</h4>
+<div class="outline-text-4" id="text-2-4-3">
+
+<div id="org200b3e0" class="figure">
+<p><img src="./Pictures/LayoutViewFreq.png" alt="LayoutViewFreq.png" />
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgff9851d" class="outline-4">
+<h4 id="orgff9851d"><span class="section-number-4">2.4.4.</span> View shortcut keys layout</h4>
+<div class="outline-text-4" id="text-2-4-4">
+
+<div id="orgc1a5f25" class="figure">
+<p><img src="./Pictures/LayoutShortcutKeys.png" alt="LayoutShortcutKeys.png" />
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org85858bf" class="outline-4">
+<h4 id="org85858bf"><span class="section-number-4">2.4.5.</span> Options dialog window</h4>
+<div class="outline-text-4" id="text-2-4-5">
+
+<div id="orgd9ae00e" class="figure">
+<p><img src="./Pictures/LayoutOptions.png" alt="LayoutOptions.png" />
+</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org87a6d00" class="outline-2">
+<h2 id="org87a6d00"><span class="section-number-2">3.</span> Tutorial</h2>
+<div class="outline-text-2" id="text-3">
 <p>
 This is a step by step tutorial to show you the main features of SASHelper. There is also a screenshot of each step for your reference.
 Let's assume that SASHelper is in the folder c:/SASHelper/. 
 </p>
 </div>
-<div id="outline-container-orgecea6bf" class="outline-3">
-<h3 id="orgecea6bf"><span class="section-number-3">2.1</span> Open SASHelper.exe</h3>
-<div class="outline-text-3" id="text-2-1">
+<div id="outline-container-org29d2bde" class="outline-3">
+<h3 id="org29d2bde"><span class="section-number-3">3.1.</span> Open SASHelper.exe</h3>
+<div class="outline-text-3" id="text-3-1">
 
-<figure>
-<img src="./Pictures/Image001.png" alt="Image001.png">
-
-</figure>
+<div id="org05ad213" class="figure">
+<p><img src="./Pictures/Image001.png" alt="Image001.png" />
+</p>
 </div>
 </div>
-<div id="outline-container-org223bbff" class="outline-3">
-<h3 id="org223bbff"><span class="section-number-3">2.2</span> Open a SAS dataset c:/SASHelper/Docs/Samples/SDTM/dm.sas7bdat</h3>
-<div class="outline-text-3" id="text-2-2">
-
-<figure>
-<img src="./Pictures/Image002.png" alt="Image002.png">
+</div>
+<div id="outline-container-org4ed62ad" class="outline-3">
+<h3 id="org4ed62ad"><span class="section-number-3">3.2.</span> Open a SAS dataset c:/SASHelper/Docs/Samples/SDTM/dm.sas7bdat</h3>
+<div class="outline-text-3" id="text-3-2">
 
-</figure>
+<div id="org5428890" class="figure">
+<p><img src="./Pictures/Image002.png" alt="Image002.png" />
+</p>
 </div>
 </div>
-
-<div id="outline-container-orgd1c682d" class="outline-3">
-<h3 id="orgd1c682d"><span class="section-number-3">2.3</span> Set an alias "DemoSDTM" for the library c:/SASHelper/Docs/Samples/SDTM/</h3>
-<div class="outline-text-3" id="text-2-3">
 </div>
-<div id="outline-container-orgb076434" class="outline-4">
-<h4 id="orgb076434"><span class="section-number-4">2.3.1</span> Right click on "c:\SASHelper\Docs\Samples\SDTM\" and then click "Set Libname"</h4>
-<div class="outline-text-4" id="text-2-3-1">
 
-<figure>
-<img src="./Pictures/Image003.png" alt="Image003.png">
+<div id="outline-container-orgf153bce" class="outline-3">
+<h3 id="orgf153bce"><span class="section-number-3">3.3.</span> Set an alias "DemoSDTM" for the library c:/SASHelper/Docs/Samples/SDTM/</h3>
+<div class="outline-text-3" id="text-3-3">
+</div>
+<div id="outline-container-org7ecb30a" class="outline-4">
+<h4 id="org7ecb30a"><span class="section-number-4">3.3.1.</span> Right click on "c:\SASHelper\Docs\Samples\SDTM\" and then click "Set Libname"</h4>
+<div class="outline-text-4" id="text-3-3-1">
 
-</figure>
+<div id="orged1e81d" class="figure">
+<p><img src="./Pictures/Image003.png" alt="Image003.png" />
+</p>
 </div>
 </div>
-
-<div id="outline-container-org3942ce1" class="outline-4">
-<h4 id="org3942ce1"><span class="section-number-4">2.3.2</span> Type in the libname "DemoSDTM", and click "OK" button.</h4>
-<div class="outline-text-4" id="text-2-3-2">
+</div>
 
-<figure>
-<img src="./Pictures/Image004.png" alt="Image004.png">
+<div id="outline-container-orgcbbf1ea" class="outline-4">
+<h4 id="orgcbbf1ea"><span class="section-number-4">3.3.2.</span> Type in the libname "DemoSDTM", and click "OK" button.</h4>
+<div class="outline-text-4" id="text-3-3-2">
 
-</figure>
+<div id="orga630aee" class="figure">
+<p><img src="./Pictures/Image004.png" alt="Image004.png" />
+</p>
 </div>
 </div>
 </div>
-
-<div id="outline-container-org88b5c3b" class="outline-3">
-<h3 id="org88b5c3b"><span class="section-number-3">2.4</span> Click the "Auto Hide" button of the Workspace window</h3>
-<div class="outline-text-3" id="text-2-4">
+</div>
 
-<figure>
-<img src="./Pictures/Image007.png" alt="Image007.png">
+<div id="outline-container-org358f9cc" class="outline-3">
+<h3 id="org358f9cc"><span class="section-number-3">3.4.</span> Click the "Auto Hide" button of the Workspace window</h3>
+<div class="outline-text-3" id="text-3-4">
 
-</figure>
+<div id="orgb01106a" class="figure">
+<p><img src="./Pictures/Image007.png" alt="Image007.png" />
+</p>
 </div>
 </div>
-
-<div id="outline-container-org69740b6" class="outline-3">
-<h3 id="org69740b6"><span class="section-number-3">2.5</span> Move the mouse cursor on the tab "Variables - dm" on the right side and hover.</h3>
-<div class="outline-text-3" id="text-2-5">
+</div>
 
-<figure>
-<img src="./Pictures/Image009.png" alt="Image009.png">
+<div id="outline-container-orge53a054" class="outline-3">
+<h3 id="orge53a054"><span class="section-number-3">3.5.</span> Move the mouse cursor on the tab "Variables - dm" on the right side and hover.</h3>
+<div class="outline-text-3" id="text-3-5">
 
-</figure>
+<div id="org6ad8b25" class="figure">
+<p><img src="./Pictures/Image009.png" alt="Image009.png" />
+</p>
 </div>
 </div>
-
-<div id="outline-container-org8561418" class="outline-3">
-<h3 id="org8561418"><span class="section-number-3">2.6</span> Dock the Variables window</h3>
-<div class="outline-text-3" id="text-2-6">
 </div>
-<div id="outline-container-orga39cbd1" class="outline-4">
-<h4 id="orga39cbd1"><span class="section-number-4">2.6.1</span> Click the "Auto Hide" button of the Variables window</h4>
-<div class="outline-text-4" id="text-2-6-1">
 
-<figure>
-<img src="./Pictures/Image009a.png" alt="Image009a.png">
+<div id="outline-container-orga83f811" class="outline-3">
+<h3 id="orga83f811"><span class="section-number-3">3.6.</span> Dock the Variables window</h3>
+<div class="outline-text-3" id="text-3-6">
+</div>
+<div id="outline-container-org434d416" class="outline-4">
+<h4 id="org434d416"><span class="section-number-4">3.6.1.</span> Click the "Auto Hide" button of the Variables window</h4>
+<div class="outline-text-4" id="text-3-6-1">
 
-</figure>
+<div id="orgc99f4c1" class="figure">
+<p><img src="./Pictures/Image009a.png" alt="Image009a.png" />
+</p>
 </div>
 </div>
-<div id="outline-container-org247e2b2" class="outline-4">
-<h4 id="org247e2b2"><span class="section-number-4">2.6.2</span> You can see the Variables window is docked.</h4>
-<div class="outline-text-4" id="text-2-6-2">
-
-<figure>
-<img src="./Pictures/Image010.png" alt="Image010.png">
+</div>
+<div id="outline-container-orgb5f0c0b" class="outline-4">
+<h4 id="orgb5f0c0b"><span class="section-number-4">3.6.2.</span> You can see the Variables window is docked.</h4>
+<div class="outline-text-4" id="text-3-6-2">
 
-</figure>
+<div id="orgd13c6d4" class="figure">
+<p><img src="./Pictures/Image010.png" alt="Image010.png" />
+</p>
 </div>
 </div>
 </div>
-
-<div id="outline-container-orga9e5a79" class="outline-3">
-<h3 id="orga9e5a79"><span class="section-number-3">2.7</span> Click any cell of the Dataset window and make the Dataset window get focus</h3>
 </div>
 
-<div id="outline-container-org115415a" class="outline-3">
-<h3 id="org115415a"><span class="section-number-3">2.8</span> Right click on any cell of the column USUBJID and click "Hide Variable"</h3>
-<div class="outline-text-3" id="text-2-8">
+<div id="outline-container-org8e7a9a2" class="outline-3">
+<h3 id="org8e7a9a2"><span class="section-number-3">3.7.</span> Click any cell of the Dataset window and make the Dataset window get focus</h3>
+</div>
 
-<figure>
-<img src="./Pictures/Image011.png" alt="Image011.png">
+<div id="outline-container-org2a48b53" class="outline-3">
+<h3 id="org2a48b53"><span class="section-number-3">3.8.</span> Right click on any cell of the column USUBJID and click "Hide Variable"</h3>
+<div class="outline-text-3" id="text-3-8">
 
-</figure>
+<div id="org39275a6" class="figure">
+<p><img src="./Pictures/Image011.png" alt="Image011.png" />
+</p>
 </div>
 </div>
-
-<div id="outline-container-orgf2fbc22" class="outline-3">
-<h3 id="orgf2fbc22"><span class="section-number-3">2.9</span> Click any cell of the Variables window and make the Variables window get focus</h3>
-<div class="outline-text-3" id="text-2-9">
+</div>
 
-<figure>
-<img src="./Pictures/Image012.png" alt="Image012.png">
+<div id="outline-container-orgd8e500f" class="outline-3">
+<h3 id="orgd8e500f"><span class="section-number-3">3.9.</span> Click any cell of the Variables window and make the Variables window get focus</h3>
+<div class="outline-text-3" id="text-3-9">
 
-</figure>
+<div id="org458f2f1" class="figure">
+<p><img src="./Pictures/Image012.png" alt="Image012.png" />
+</p>
 </div>
 </div>
-
-<div id="outline-container-orgc0daf49" class="outline-3">
-<h3 id="orgc0daf49"><span class="section-number-3">2.10</span> Click the checkbox on the row USUBJID</h3>
-<div class="outline-text-3" id="text-2-10">
+</div>
 
-<figure>
-<img src="./Pictures/Image013.png" alt="Image013.png">
+<div id="outline-container-orgafa9529" class="outline-3">
+<h3 id="orgafa9529"><span class="section-number-3">3.10.</span> Click the checkbox on the row USUBJID</h3>
+<div class="outline-text-3" id="text-3-10">
 
-</figure>
+<div id="org43bcc8f" class="figure">
+<p><img src="./Pictures/Image013.png" alt="Image013.png" />
+</p>
 </div>
 </div>
-
-<div id="outline-container-orgda814e8" class="outline-3">
-<h3 id="orgda814e8"><span class="section-number-3">2.11</span> Let's Hide All Variables</h3>
-<div class="outline-text-3" id="text-2-11">
 </div>
-<div id="outline-container-org0f15ca1" class="outline-4">
-<h4 id="org0f15ca1"><span class="section-number-4">2.11.1</span> Right click on any cell of the Variables window, and click "Hide All Variables"</h4>
-<div class="outline-text-4" id="text-2-11-1">
 
-<figure>
-<img src="./Pictures/Image015.png" alt="Image015.png">
+<div id="outline-container-org4424c22" class="outline-3">
+<h3 id="org4424c22"><span class="section-number-3">3.11.</span> Let's Hide All Variables</h3>
+<div class="outline-text-3" id="text-3-11">
+</div>
+<div id="outline-container-orgd720c47" class="outline-4">
+<h4 id="orgd720c47"><span class="section-number-4">3.11.1.</span> Right click on any cell of the Variables window, and click "Hide All Variables"</h4>
+<div class="outline-text-4" id="text-3-11-1">
 
-</figure>
+<div id="orgd653775" class="figure">
+<p><img src="./Pictures/Image015.png" alt="Image015.png" />
+</p>
 </div>
 </div>
-<div id="outline-container-org3746923" class="outline-4">
-<h4 id="org3746923"><span class="section-number-4">2.11.2</span> You will see that all the variables are hidden.</h4>
-<div class="outline-text-4" id="text-2-11-2">
-
-<figure>
-<img src="./Pictures/Image016.png" alt="Image016.png">
+</div>
+<div id="outline-container-org73f9d16" class="outline-4">
+<h4 id="org73f9d16"><span class="section-number-4">3.11.2.</span> You will see that all the variables are hidden.</h4>
+<div class="outline-text-4" id="text-3-11-2">
 
-</figure>
+<div id="org9fee94e" class="figure">
+<p><img src="./Pictures/Image016.png" alt="Image016.png" />
+</p>
 </div>
 </div>
 </div>
-
-<div id="outline-container-org33a05ce" class="outline-3">
-<h3 id="org33a05ce"><span class="section-number-3">2.12</span> Click the checkbox to show the variables USUBJID, AGE, SEX, and ARM</h3>
-<div class="outline-text-3" id="text-2-12">
+</div>
 
-<figure>
-<img src="./Pictures/Image017.png" alt="Image017.png">
+<div id="outline-container-orge5a5933" class="outline-3">
+<h3 id="orge5a5933"><span class="section-number-3">3.12.</span> Click the checkbox to show the variables USUBJID, AGE, SEX, and ARM</h3>
+<div class="outline-text-3" id="text-3-12">
 
-</figure>
+<div id="org9894321" class="figure">
+<p><img src="./Pictures/Image017.png" alt="Image017.png" />
+</p>
 </div>
 </div>
-
-<div id="outline-container-org2f40674" class="outline-3">
-<h3 id="org2f40674"><span class="section-number-3">2.13</span> Click any cell of the Dataset window and make the Dataset window get focus</h3>
 </div>
 
-<div id="outline-container-orgf27e118" class="outline-3">
-<h3 id="orgf27e118"><span class="section-number-3">2.14</span> Let's calculate the Frequency of SEX by context menu</h3>
-<div class="outline-text-3" id="text-2-14">
+<div id="outline-container-org923e596" class="outline-3">
+<h3 id="org923e596"><span class="section-number-3">3.13.</span> Click any cell of the Dataset window and make the Dataset window get focus</h3>
 </div>
-<div id="outline-container-orge1a1111" class="outline-4">
-<h4 id="orge1a1111"><span class="section-number-4">2.14.1</span> Right click any cell of the column SEX, and click "Frequency"</h4>
-<div class="outline-text-4" id="text-2-14-1">
 
-<figure>
-<img src="./Pictures/Image018.png" alt="Image018.png">
+<div id="outline-container-org295cb56" class="outline-3">
+<h3 id="org295cb56"><span class="section-number-3">3.14.</span> Let's calculate the Frequency of SEX by context menu</h3>
+<div class="outline-text-3" id="text-3-14">
+</div>
+<div id="outline-container-orge15070d" class="outline-4">
+<h4 id="orge15070d"><span class="section-number-4">3.14.1.</span> Right click any cell of the column SEX, and click "Frequency"</h4>
+<div class="outline-text-4" id="text-3-14-1">
 
-</figure>
+<div id="org64088d0" class="figure">
+<p><img src="./Pictures/Image018.png" alt="Image018.png" />
+</p>
 </div>
 </div>
-<div id="outline-container-org3b3890c" class="outline-4">
-<h4 id="org3b3890c"><span class="section-number-4">2.14.2</span> Now you will see the frequencies of SEX on right side Frequency window.</h4>
-<div class="outline-text-4" id="text-2-14-2">
-
-<figure>
-<img src="./Pictures/Image019.png" alt="Image019.png">
+</div>
+<div id="outline-container-orgfbb1ac3" class="outline-4">
+<h4 id="orgfbb1ac3"><span class="section-number-4">3.14.2.</span> Now you will see the frequencies of SEX on right side Frequency window.</h4>
+<div class="outline-text-4" id="text-3-14-2">
 
-</figure>
+<div id="org38e04e7" class="figure">
+<p><img src="./Pictures/Image019.png" alt="Image019.png" />
+</p>
 </div>
 </div>
 </div>
-
-<div id="outline-container-org6034af0" class="outline-3">
-<h3 id="org6034af0"><span class="section-number-3">2.15</span> Let's calculate the Frequency of ARM by shortcut key 'F'</h3>
-<div class="outline-text-3" id="text-2-15">
 </div>
-<div id="outline-container-org120e7ba" class="outline-4">
-<h4 id="org120e7ba"><span class="section-number-4">2.15.1</span> Click any cell of the column ARM, and press the key 'F' on the keyboard</h4>
-<div class="outline-text-4" id="text-2-15-1">
 
-<figure>
-<img src="./Pictures/Image020.png" alt="Image020.png">
+<div id="outline-container-org141551c" class="outline-3">
+<h3 id="org141551c"><span class="section-number-3">3.15.</span> Let's calculate the Frequency of ARM by shortcut key 'F'</h3>
+<div class="outline-text-3" id="text-3-15">
+</div>
+<div id="outline-container-org7fbe782" class="outline-4">
+<h4 id="org7fbe782"><span class="section-number-4">3.15.1.</span> Click any cell of the column ARM, and press the key 'F' on the keyboard</h4>
+<div class="outline-text-4" id="text-3-15-1">
 
-</figure>
+<div id="orgdac06cf" class="figure">
+<p><img src="./Pictures/Image020.png" alt="Image020.png" />
+</p>
 </div>
 </div>
-<div id="outline-container-org59e1343" class="outline-4">
-<h4 id="org59e1343"><span class="section-number-4">2.15.2</span> Now you will see the frequencies of ARM on right side Frequency window.</h4>
-<div class="outline-text-4" id="text-2-15-2">
-
-<figure>
-<img src="./Pictures/Image021.png" alt="Image021.png">
+</div>
+<div id="outline-container-orgc8e39bd" class="outline-4">
+<h4 id="orgc8e39bd"><span class="section-number-4">3.15.2.</span> Now you will see the frequencies of ARM on right side Frequency window.</h4>
+<div class="outline-text-4" id="text-3-15-2">
 
-</figure>
+<div id="orgd8ab594" class="figure">
+<p><img src="./Pictures/Image021.png" alt="Image021.png" />
+</p>
 </div>
 </div>
 </div>
-
-<div id="outline-container-org80b0dcf" class="outline-3">
-<h3 id="org80b0dcf"><span class="section-number-3">2.16</span> Crosstabulation</h3>
-<div class="outline-text-3" id="text-2-16">
 </div>
-<div id="outline-container-orgdaa92d4" class="outline-4">
-<h4 id="orgdaa92d4"><span class="section-number-4">2.16.1</span> Hold Ctrl key, click any cell of the column SEX, then click any cell of the column ARM</h4>
-<div class="outline-text-4" id="text-2-16-1">
 
-<figure>
-<img src="./Pictures/Image022.png" alt="Image022.png">
+<div id="outline-container-org1ec6aa4" class="outline-3">
+<h3 id="org1ec6aa4"><span class="section-number-3">3.16.</span> Crosstabulation</h3>
+<div class="outline-text-3" id="text-3-16">
+</div>
+<div id="outline-container-org7fd2a66" class="outline-4">
+<h4 id="org7fd2a66"><span class="section-number-4">3.16.1.</span> Hold Ctrl key, click any cell of the column SEX, then click any cell of the column ARM</h4>
+<div class="outline-text-4" id="text-3-16-1">
 
-</figure>
+<div id="orgc62f295" class="figure">
+<p><img src="./Pictures/Image022.png" alt="Image022.png" />
+</p>
 </div>
 </div>
-
-<div id="outline-container-org99634a2" class="outline-4">
-<h4 id="org99634a2"><span class="section-number-4">2.16.2</span> press the key 'F' on the keyboard</h4>
-<div class="outline-text-4" id="text-2-16-2">
+</div>
 
-<figure>
-<img src="./Pictures/Image023.png" alt="Image023.png">
+<div id="outline-container-orge9b3af8" class="outline-4">
+<h4 id="orge9b3af8"><span class="section-number-4">3.16.2.</span> press the key 'F' on the keyboard</h4>
+<div class="outline-text-4" id="text-3-16-2">
 
-</figure>
+<div id="org7bd75fb" class="figure">
+<p><img src="./Pictures/Image023.png" alt="Image023.png" />
+</p>
 </div>
 </div>
 </div>
+</div>
 
-<div id="outline-container-org5542920" class="outline-3">
-<h3 id="org5542920"><span class="section-number-3">2.17</span> Let's open another SAS dataset</h3>
-<div class="outline-text-3" id="text-2-17">
+<div id="outline-container-org294cee2" class="outline-3">
+<h3 id="org294cee2"><span class="section-number-3">3.17.</span> Let's open another SAS dataset</h3>
+<div class="outline-text-3" id="text-3-17">
 </div>
-<div id="outline-container-org7f65ea7" class="outline-4">
-<h4 id="org7f65ea7"><span class="section-number-4">2.17.1</span> Click "Workspace" on the left side</h4>
+<div id="outline-container-orgdaad764" class="outline-4">
+<h4 id="orgdaad764"><span class="section-number-4">3.17.1.</span> Click "Workspace" on the left side</h4>
 </div>
 
-<div id="outline-container-org2aead85" class="outline-4">
-<h4 id="org2aead85"><span class="section-number-4">2.17.2</span> Double click "ae.sas7bdat"</h4>
-<div class="outline-text-4" id="text-2-17-2">
+<div id="outline-container-org6d1cb95" class="outline-4">
+<h4 id="org6d1cb95"><span class="section-number-4">3.17.2.</span> Double click "ae.sas7bdat"</h4>
+<div class="outline-text-4" id="text-3-17-2">
 
-<figure>
-<img src="./Pictures/Image025.png" alt="Image025.png">
-
-</figure>
+<div id="org96f1715" class="figure">
+<p><img src="./Pictures/Image025.png" alt="Image025.png" />
+</p>
 </div>
 </div>
 </div>
-
-<div id="outline-container-orgbb21abd" class="outline-3">
-<h3 id="orgbb21abd"><span class="section-number-3">2.18</span> Click any cell of the Dataset window with the title "ae.sas7bdat" and make it get focus</h3>
 </div>
 
-<div id="outline-container-org51759eb" class="outline-3">
-<h3 id="org51759eb"><span class="section-number-3">2.19</span> Let's calculate the "Frequency(USUBJID)" of USUBJID</h3>
-<div class="outline-text-3" id="text-2-19">
+<div id="outline-container-orge8415cc" class="outline-3">
+<h3 id="orge8415cc"><span class="section-number-3">3.18.</span> Click any cell of the Dataset window with the title "ae.sas7bdat" and make it get focus</h3>
 </div>
-<div id="outline-container-org65e2492" class="outline-4">
-<h4 id="org65e2492"><span class="section-number-4">2.19.1</span> Right click any cell of the column USUBJID and click "Frequency(USUBJID)"</h4>
-<div class="outline-text-4" id="text-2-19-1">
 
-<figure>
-<img src="./Pictures/Image027.png" alt="Image027.png">
+<div id="outline-container-org38e254b" class="outline-3">
+<h3 id="org38e254b"><span class="section-number-3">3.19.</span> Let's calculate the "Frequency(USUBJID)" of USUBJID</h3>
+<div class="outline-text-3" id="text-3-19">
+</div>
+<div id="outline-container-org8299543" class="outline-4">
+<h4 id="org8299543"><span class="section-number-4">3.19.1.</span> Right click any cell of the column USUBJID and click "Frequency(USUBJID)"</h4>
+<div class="outline-text-4" id="text-3-19-1">
 
-</figure>
+<div id="org9bb503d" class="figure">
+<p><img src="./Pictures/Image027.png" alt="Image027.png" />
+</p>
 </div>
 </div>
-<div id="outline-container-orge7ca2bd" class="outline-4">
-<h4 id="orge7ca2bd"><span class="section-number-4">2.19.2</span> Now you will see the count of distict USUBJID of USUBJID on right side Frequency window.</h4>
-<div class="outline-text-4" id="text-2-19-2">
-
-<figure>
-<img src="./Pictures/Image028.png" alt="Image028.png">
+</div>
+<div id="outline-container-org9205af7" class="outline-4">
+<h4 id="org9205af7"><span class="section-number-4">3.19.2.</span> Now you will see the count of distict USUBJID of USUBJID on right side Frequency window.</h4>
+<div class="outline-text-4" id="text-3-19-2">
 
-</figure>
+<div id="orgf69eed6" class="figure">
+<p><img src="./Pictures/Image028.png" alt="Image028.png" />
+</p>
 </div>
 </div>
 </div>
-
-<div id="outline-container-org0a448cb" class="outline-3">
-<h3 id="org0a448cb"><span class="section-number-3">2.20</span> Try again to right click any cell of the column STUDYID and click "Frequency(USUBJID)"</h3>
-<div class="outline-text-3" id="text-2-20">
+</div>
 
-<figure>
-<img src="./Pictures/Image029.png" alt="Image029.png">
+<div id="outline-container-orgc4004dd" class="outline-3">
+<h3 id="orgc4004dd"><span class="section-number-3">3.20.</span> Try again to right click any cell of the column STUDYID and click "Frequency(USUBJID)"</h3>
+<div class="outline-text-3" id="text-3-20">
 
-</figure>
+<div id="org9a05a5d" class="figure">
+<p><img src="./Pictures/Image029.png" alt="Image029.png" />
+</p>
 </div>
 </div>
-
-<div id="outline-container-org18fea03" class="outline-3">
-<h3 id="org18fea03"><span class="section-number-3">2.21</span> Let's try the Find feature</h3>
-<div class="outline-text-3" id="text-2-21">
 </div>
-<div id="outline-container-org2b4bb04" class="outline-4">
-<h4 id="org2b4bb04"><span class="section-number-4">2.21.1</span> Press shortcut key "Ctrl + F", enter "Vomiting" in the Find ComboBox and press "Enter" key</h4>
-<div class="outline-text-4" id="text-2-21-1">
 
-<figure>
-<img src="./Pictures/Image030.png" alt="Image030.png">
+<div id="outline-container-org27a7017" class="outline-3">
+<h3 id="org27a7017"><span class="section-number-3">3.21.</span> Let's try the Find feature</h3>
+<div class="outline-text-3" id="text-3-21">
+</div>
+<div id="outline-container-org4aad880" class="outline-4">
+<h4 id="org4aad880"><span class="section-number-4">3.21.1.</span> Press shortcut key "Ctrl + F", enter "Vomiting" in the Find ComboBox and press "Enter" key</h4>
+<div class="outline-text-4" id="text-3-21-1">
 
-</figure>
+<div id="orgc7cd040" class="figure">
+<p><img src="./Pictures/Image030.png" alt="Image030.png" />
+</p>
 </div>
 </div>
-
-<div id="outline-container-org2ee4bc0" class="outline-4">
-<h4 id="org2ee4bc0"><span class="section-number-4">2.21.2</span> Press "F3" to find next one, and you will find that the Find feature is case insensitive.</h4>
-<div class="outline-text-4" id="text-2-21-2">
+</div>
 
-<figure>
-<img src="./Pictures/Image031.png" alt="Image031.png">
+<div id="outline-container-org6227d3d" class="outline-4">
+<h4 id="org6227d3d"><span class="section-number-4">3.21.2.</span> Press "F3" to find next one, and you will find that the Find feature is case insensitive.</h4>
+<div class="outline-text-4" id="text-3-21-2">
 
-</figure>
+<div id="org551d272" class="figure">
+<p><img src="./Pictures/Image031.png" alt="Image031.png" />
+</p>
+</div>
 </div>
 </div>
 
-<div id="outline-container-org361f8e3" class="outline-4">
-<h4 id="org361f8e3"><span class="section-number-4">2.21.3</span> Let's try to enter the filter manually</h4>
-<div class="outline-text-4" id="text-2-21-3">
+<div id="outline-container-orgc3ecd04" class="outline-4">
+<h4 id="orgc3ecd04"><span class="section-number-4">3.21.3.</span> Let's try to enter the filter manually</h4>
+<div class="outline-text-4" id="text-3-21-3">
 </div>
 <ol class="org-ol">
-<li><a id="orgfec8989"></a>Click the Command ComboBox<br>
-<div class="outline-text-5" id="text-2-21-3-1">
+<li><a id="org9ede3cc"></a>Click the Command ComboBox<br />
+<div class="outline-text-5" id="text-3-21-3-1">
 
-<figure>
-<img src="./Pictures/Image032.png" alt="Image032.png">
-
-</figure>
+<div id="orgcd3185f" class="figure">
+<p><img src="./Pictures/Image032.png" alt="Image032.png" />
+</p>
+</div>
 </div>
 </li>
 
-<li><a id="orge8c9fb2"></a>Enter "if aeseq = 3", and press "Enter" key<br>
-<div class="outline-text-5" id="text-2-21-3-2">
+<li><a id="org5b3d9a1"></a>Enter "if aeseq = 3", and press "Enter" key<br />
+<div class="outline-text-5" id="text-3-21-3-2">
 
-<figure>
-<img src="./Pictures/Image033.png" alt="Image033.png">
-
-</figure>
+<div id="orgee83dee" class="figure">
+<p><img src="./Pictures/Image033.png" alt="Image033.png" />
+</p>
+</div>
 </div>
 </li>
 
-<li><a id="org7d3363e"></a>Press the shortcut key "C" to clear the dataset filter, and you will see "clear dataset filter" in the Command ComboBox<br>
-<div class="outline-text-5" id="text-2-21-3-3">
+<li><a id="org221521f"></a>Press the shortcut key "C" to clear the dataset filter, and you will see "clear dataset filter" in the Command ComboBox<br />
+<div class="outline-text-5" id="text-3-21-3-3">
 
-<figure>
-<img src="./Pictures/Image034.png" alt="Image034.png">
-
-</figure>
+<div id="orgc40b087" class="figure">
+<p><img src="./Pictures/Image034.png" alt="Image034.png" />
+</p>
+</div>
 </div>
 </li>
 
-<li><a id="orga665ab2"></a>Press the shortcut key "F5" to focus Command ComboBox, then enter "if aestdy &gt; aeendy"<br>
-<div class="outline-text-5" id="text-2-21-3-4">
+<li><a id="org151725f"></a>Press the shortcut key "F5" to focus Command ComboBox, then enter "if aestdy &gt; aeendy"<br />
+<div class="outline-text-5" id="text-3-21-3-4">
 
-<figure>
-<img src="./Pictures/Image035.png" alt="Image035.png">
-
-</figure>
+<div id="org1499a6c" class="figure">
+<p><img src="./Pictures/Image035.png" alt="Image035.png" />
+</p>
+</div>
 </div>
 </li>
 </ol>
@@ -938,20 +947,20 @@ Let's assume that SASHelper is in the folder c:/SASHelper/.
 </div>
 </div>
 
-<div id="outline-container-org120bda1" class="outline-2">
-<h2 id="org120bda1"><span class="section-number-2">3</span> How-to Guide</h2>
-<div class="outline-text-2" id="text-3">
+<div id="outline-container-org0643444" class="outline-2">
+<h2 id="org0643444"><span class="section-number-2">4.</span> How-to Guide</h2>
+<div class="outline-text-2" id="text-4">
 </div>
-<div id="outline-container-org223927a" class="outline-3">
-<h3 id="org223927a"><span class="section-number-3">3.1</span> How to subset a single dataset?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Filter">Filter</span>&#xa0;<span class="Dataset">Dataset</span></span></h3>
-<div class="outline-text-3" id="text-3-1">
+<div id="outline-container-org154f3e5" class="outline-3">
+<h3 id="org154f3e5"><span class="section-number-3">4.1.</span> How to subset a single dataset?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Filter">Filter</span>&#xa0;<span class="Dataset">Dataset</span></span></h3>
+<div class="outline-text-3" id="text-4-1">
 <ul class="org-ul">
 <li>Right click on the variable's value to be used in the IF clause.</li>
 <li>Choose from the IF clauses listed in the context menu.</li>
 <li>Repeat the above steps below if you need to add another subset condition.</li>
 </ul>
 
-<div class="info">
+<div class="info" id="org57ffcc7">
 <p>
 Shortcut Key: <b>D</b>.
 </p>
@@ -961,21 +970,21 @@ D stands for Dataset filter, and the default operator is '='.
 </p>
 
 <p>
-Reter to <a href="#org149d990"><i>Shortcut Keys</i></a> for other shortcut keys. For example, the '&lt;' key will filter for all values less than the value you are on.
+Reter to <a href="#orga83f93b"><i>Shortcut Keys</i></a> for other shortcut keys. For example, the '&lt;' key will filter for all values less than the value you are on.
 </p>
 
 </div>
 </div>
 </div>
 
-<div id="outline-container-orgc9d14f7" class="outline-3">
-<h3 id="orgc9d14f7"><span class="section-number-3">3.2</span> How to Clear the dataset filter?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Filter">Filter</span>&#xa0;<span class="Dataset">Dataset</span></span></h3>
-<div class="outline-text-3" id="text-3-2">
+<div id="outline-container-orgcd4140e" class="outline-3">
+<h3 id="orgcd4140e"><span class="section-number-3">4.2.</span> How to Clear the dataset filter?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Filter">Filter</span>&#xa0;<span class="Dataset">Dataset</span></span></h3>
+<div class="outline-text-3" id="text-4-2">
 <p>
 Right click anywhere on the data and choose “Clear Dataset Filter” from the context menu.
 </p>
 
-<div class="info">
+<div class="info" id="orga45ef77">
 <p>
 Shortcut Key: <b>C</b>.
 </p>
@@ -988,14 +997,14 @@ C stands for Clear dataset filter.
 </div>
 </div>
 
-<div id="outline-container-orgd1bfd5a" class="outline-3">
-<h3 id="orgd1bfd5a"><span class="section-number-3">3.3</span> How to undo the Dataset Filter?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Filter">Filter</span>&#xa0;<span class="Dataset">Dataset</span></span></h3>
-<div class="outline-text-3" id="text-3-3">
+<div id="outline-container-org8bca89f" class="outline-3">
+<h3 id="org8bca89f"><span class="section-number-3">4.3.</span> How to undo the Dataset Filter?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Filter">Filter</span>&#xa0;<span class="Dataset">Dataset</span></span></h3>
+<div class="outline-text-3" id="text-4-3">
 <p>
 If you are using the shortcut keys to filter the data, you can use shortcut key "Z" or "Ctrl + Z" to undo one step.
 </p>
 
-<div class="info">
+<div class="info" id="org58851b8">
 <p>
 Shortcut Key: <b>Z</b> or <b>Ctrl + Z</b>.
 </p>
@@ -1008,9 +1017,9 @@ C stands for Clear dataset filter.
 </div>
 </div>
 
-<div id="outline-container-org6cb6799" class="outline-3">
-<h3 id="org6cb6799"><span class="section-number-3">3.4</span> How to know the current dataset filter?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Filter">Filter</span>&#xa0;<span class="Dataset">Dataset</span></span></h3>
-<div class="outline-text-3" id="text-3-4">
+<div id="outline-container-org16056ad" class="outline-3">
+<h3 id="org16056ad"><span class="section-number-3">4.4.</span> How to know the current dataset filter?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Filter">Filter</span>&#xa0;<span class="Dataset">Dataset</span></span></h3>
+<div class="outline-text-3" id="text-4-4">
 <ul class="org-ul">
 <li>The complete dataset filter text is shown in the Status Bar at the bottom of the screen. If the dataset filter text is truncated, you can hover the mouse cursor over it, a tip box will show all the text.</li>
 <li>Or you can also click the filter icon on the toolbar, a dialog window "Dataset Filter" will show the complete dataset filter text.</li>
@@ -1018,24 +1027,24 @@ C stands for Clear dataset filter.
 </div>
 </div>
 
-<div id="outline-container-orgd146ffc" class="outline-3">
-<h3 id="orgd146ffc"><span class="section-number-3">3.5</span> How to change the default logical operator from AND to OR while subsetting?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Filter">Filter</span>&#xa0;<span class="Dataset">Dataset</span></span></h3>
-<div class="outline-text-3" id="text-3-5">
+<div id="outline-container-orgcc07c6a" class="outline-3">
+<h3 id="orgcc07c6a"><span class="section-number-3">4.5.</span> How to change the default logical operator from AND to OR while subsetting?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Filter">Filter</span>&#xa0;<span class="Dataset">Dataset</span></span></h3>
+<div class="outline-text-3" id="text-4-5">
 <p>
 Compound dataset subsets are built with the default logical operator AND. If you want to use the logical operator OR, please type in the shortcut key '(' to start, then all the subset conditions are linked with OR until you type in ')'. 
 </p>
 </div>
 </div>
 
-<div id="outline-container-org4d3a503" class="outline-3">
-<h3 id="org4d3a503"><span class="section-number-3">3.6</span> How to Subset on all the datasets in a library?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Filter">Filter</span>&#xa0;<span class="Library">Library</span></span></h3>
-<div class="outline-text-3" id="text-3-6">
+<div id="outline-container-orga205cd3" class="outline-3">
+<h3 id="orga205cd3"><span class="section-number-3">4.6.</span> How to Subset on all the datasets in a library?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Filter">Filter</span>&#xa0;<span class="Library">Library</span></span></h3>
+<div class="outline-text-3" id="text-4-6">
 <ul class="org-ul">
 <li>Right click on the variable's value to be used in the WHERE clause.</li>
 <li>Choose the WHERE clause from the context menu.</li>
 </ul>
 
-<div class="info">
+<div class="info" id="orgbe56153">
 <p>
 Tip:
 </p>
@@ -1046,7 +1055,7 @@ Tip:
 
 </div>
 
-<div class="info">
+<div class="info" id="orgc869d45">
 <p>
 Shortcut Key: <b>L</b>.
 </p>
@@ -1059,23 +1068,23 @@ L stands for Library filter.
 </div>
 </div>
 
-<div id="outline-container-orgeba8827" class="outline-3">
-<h3 id="orgeba8827"><span class="section-number-3">3.7</span> How to know the current library filter?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Filter">Filter</span>&#xa0;<span class="Library">Library</span></span></h3>
-<div class="outline-text-3" id="text-3-7">
+<div id="outline-container-orgef18f18" class="outline-3">
+<h3 id="orgef18f18"><span class="section-number-3">4.7.</span> How to know the current library filter?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Filter">Filter</span>&#xa0;<span class="Library">Library</span></span></h3>
+<div class="outline-text-3" id="text-4-7">
 <p>
 The library filter is shown in the Status Bar at the bottom of the screen in red color.
 </p>
 </div>
 </div>
 
-<div id="outline-container-orgff300c6" class="outline-3">
-<h3 id="orgff300c6"><span class="section-number-3">3.8</span> How to Clear the library filter?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Filter">Filter</span>&#xa0;<span class="Library">Library</span></span></h3>
-<div class="outline-text-3" id="text-3-8">
+<div id="outline-container-org4bfcee2" class="outline-3">
+<h3 id="org4bfcee2"><span class="section-number-3">4.8.</span> How to Clear the library filter?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Filter">Filter</span>&#xa0;<span class="Library">Library</span></span></h3>
+<div class="outline-text-3" id="text-4-8">
 <p>
 Right click anywhere on the data and choose “Clear Library Filter” from the context menu.
 </p>
 
-<div class="info">
+<div class="info" id="orga9033ef">
 <p>
 Shortcut Key: <b>ALT + C</b>.
 </p>
@@ -1088,14 +1097,14 @@ C stands for Clear library filter.
 </div>
 </div>
 
-<div id="outline-container-org456d01e" class="outline-3">
-<h3 id="org456d01e"><span class="section-number-3">3.9</span> How to get frequencies of values of one variable?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Frequency">Frequency</span></span></h3>
-<div class="outline-text-3" id="text-3-9">
+<div id="outline-container-org1a99cf8" class="outline-3">
+<h3 id="org1a99cf8"><span class="section-number-3">4.9.</span> How to get frequencies of values of one variable?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Frequency">Frequency</span></span></h3>
+<div class="outline-text-3" id="text-4-9">
 <p>
 From anywhere within that variable's column, right click and choose “Frequency” from the context menu. 
 </p>
 
-<div class="info">
+<div class="info" id="orgbabdb73">
 <p>
 Tip:
 </p>
@@ -1107,7 +1116,7 @@ Tip:
 
 </div>
 
-<div class="info">
+<div class="info" id="org25502a1">
 <p>
 Shortcut Key: <b>F</b>.
 </p>
@@ -1120,36 +1129,36 @@ F stands for Frequency.
 </div>
 </div>
 
-<div id="outline-container-org5edd35e" class="outline-3">
-<h3 id="org5edd35e"><span class="section-number-3">3.10</span> How to get frequencies of values of multiple variables (crosstabulation)?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Frequency">Frequency</span></span></h3>
-<div class="outline-text-3" id="text-3-10">
+<div id="outline-container-org0913626" class="outline-3">
+<h3 id="org0913626"><span class="section-number-3">4.10.</span> How to get frequencies of values of multiple variables (crosstabulation)?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Frequency">Frequency</span></span></h3>
+<div class="outline-text-3" id="text-4-10">
 <ul class="org-ul">
 <li>Holding Ctrl to select multiple cells. One varialbe, one cell.</li>
 <li>Right click on one of the selected cells</li>
 <li>Choose "Frequency" from the context menu</li>
 </ul>
 
-<div class="info">
+<div class="info" id="orgf2c7b28">
 <p>
 Tip:
 </p>
 <ul class="org-ul">
 <li>You can also use the shortcut key <b>F</b> instead of context menus.</li>
-<li>The crosstabulation bases on the variable orders in the dataset. If needed, please reorder the variables. Refer to <a href="#org0e6f9e2"><i>How to Reorder the variables from the Dataset window?</i></a></li>
+<li>The crosstabulation bases on the variable orders in the dataset. If needed, please reorder the variables. Refer to <a href="#org361aeda"><i>How to Reorder the variables from the Dataset window?</i></a></li>
 </ul>
 
 </div>
 </div>
 </div>
 
-<div id="outline-container-org6a76623" class="outline-3">
-<h3 id="org6a76623"><span class="section-number-3">3.11</span> How to get frequencies of distinct USUBJIDs of one variable?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Frequency">Frequency</span></span></h3>
-<div class="outline-text-3" id="text-3-11">
+<div id="outline-container-orgceb0bdc" class="outline-3">
+<h3 id="orgceb0bdc"><span class="section-number-3">4.11.</span> How to get frequencies of distinct USUBJIDs of one variable?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Frequency">Frequency</span></span></h3>
+<div class="outline-text-3" id="text-4-11">
 <p>
 From anywhere within that variable's column, right click and choose “Frequency (USUBJID)” from the context menu. 
 </p>
 
-<div class="info">
+<div class="info" id="orgcd7df56">
 <p>
 Shortcut Key: <b>N</b>.
 </p>
@@ -1162,9 +1171,9 @@ N is the Number of distinct USUBJIDs.
 </div>
 </div>
 
-<div id="outline-container-org30a7943" class="outline-3">
-<h3 id="org30a7943"><span class="section-number-3">3.12</span> How to get frequencies of distinct USUBJIDs of multiple variables (crosstabulation)?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Frequency">Frequency</span></span></h3>
-<div class="outline-text-3" id="text-3-12">
+<div id="outline-container-org643f4de" class="outline-3">
+<h3 id="org643f4de"><span class="section-number-3">4.12.</span> How to get frequencies of distinct USUBJIDs of multiple variables (crosstabulation)?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Frequency">Frequency</span></span></h3>
+<div class="outline-text-3" id="text-4-12">
 <ul class="org-ul">
 <li>Holding Ctrl to select multiple cells. One varialbe, one cell.</li>
 <li>Right click on one of the selected cells</li>
@@ -1173,14 +1182,14 @@ N is the Number of distinct USUBJIDs.
 </div>
 </div>
 
-<div id="outline-container-org41eaaf1" class="outline-3">
-<h3 id="org41eaaf1"><span class="section-number-3">3.13</span> How to use the Frequency window to help with subsetting?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Frequency">Frequency</span>&#xa0;<span class="Filter">Filter</span></span></h3>
-<div class="outline-text-3" id="text-3-13">
+<div id="outline-container-org28456b9" class="outline-3">
+<h3 id="org28456b9"><span class="section-number-3">4.13.</span> How to use the Frequency window to help with subsetting?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Frequency">Frequency</span>&#xa0;<span class="Filter">Filter</span></span></h3>
+<div class="outline-text-3" id="text-4-13">
 <p>
 From within the Frequency window, right click and choose the appropriate filter.  
 </p>
 
-<div class="info">
+<div class="info" id="orgef69160">
 <p>
 Tip: if there are more than a few values, you may want to sort the frequency window by the Values to be able to quickly find the value you want to subset.  
 </p>
@@ -1189,15 +1198,15 @@ Tip: if there are more than a few values, you may want to sort the frequency win
 </div>
 </div>
 
-<div id="outline-container-orgf1a57f4" class="outline-3">
-<h3 id="orgf1a57f4"><span class="section-number-3">3.14</span> How to Hide/Unhide variables from the Variables window?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Variables">Variables</span></span></h3>
-<div class="outline-text-3" id="text-3-14">
+<div id="outline-container-org5faf7dd" class="outline-3">
+<h3 id="org5faf7dd"><span class="section-number-3">4.14.</span> How to Hide/Unhide variables from the Variables window?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Variables">Variables</span></span></h3>
+<div class="outline-text-3" id="text-4-14">
 <ul class="org-ul">
 <li>Uncheck and check the CheckBox of variables to hide and unhide variables respectively.</li>
 <li>Or right click on the row/variable and choose "Hide/Unhide Variable" from the context menu.</li>
 </ul>
 
-<div class="info">
+<div class="info" id="orge3ad4b4">
 <p>
 Shortcut Key: <b>H</b>.
 </p>
@@ -1210,15 +1219,15 @@ H stands for Hide variable.
 </div>
 </div>
 
-<div id="outline-container-org8be22fd" class="outline-3">
-<h3 id="org8be22fd"><span class="section-number-3">3.15</span> How to Hide variables from the Dataset window?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Dataset">Dataset</span></span></h3>
-<div class="outline-text-3" id="text-3-15">
+<div id="outline-container-orgc249b7f" class="outline-3">
+<h3 id="orgc249b7f"><span class="section-number-3">4.15.</span> How to Hide variables from the Dataset window?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Dataset">Dataset</span></span></h3>
+<div class="outline-text-3" id="text-4-15">
 <ul class="org-ul">
 <li>Select one cell of the column/variable that you want to hide</li>
 <li>Right click and choose "Hide Variable" from the context menu</li>
 </ul>
 
-<div class="info">
+<div class="info" id="org682653b">
 <p>
 Shortcut Key: <b>H</b>.
 </p>
@@ -1231,14 +1240,14 @@ H stands for Hide variable.
 </div>
 </div>
 
-<div id="outline-container-org2697373" class="outline-3">
-<h3 id="org2697373"><span class="section-number-3">3.16</span> How to Hide all variables from the Variables window?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Variables">Variables</span></span></h3>
-<div class="outline-text-3" id="text-3-16">
+<div id="outline-container-org3a84021" class="outline-3">
+<h3 id="org3a84021"><span class="section-number-3">4.16.</span> How to Hide all variables from the Variables window?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Variables">Variables</span></span></h3>
+<div class="outline-text-3" id="text-4-16">
 <p>
 Right click any cell and choose "Hide All Variables" from the context menu.
 </p>
 
-<div class="info">
+<div class="info" id="orgdf3f30d">
 <p>
 Shortcut Key: <b>ALT + H</b>.
 </p>
@@ -1251,14 +1260,14 @@ H stands for Hide variable.
 </div>
 </div>
 
-<div id="outline-container-org1468697" class="outline-3">
-<h3 id="org1468697"><span class="section-number-3">3.17</span> How to Unhide all variables from the Variables window?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Variables">Variables</span></span></h3>
-<div class="outline-text-3" id="text-3-17">
+<div id="outline-container-orgd297cf2" class="outline-3">
+<h3 id="orgd297cf2"><span class="section-number-3">4.17.</span> How to Unhide all variables from the Variables window?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Variables">Variables</span></span></h3>
+<div class="outline-text-3" id="text-4-17">
 <p>
 Right click any cell and choose "Unhide All Variables" from the context menu.
 </p>
 
-<div class="info">
+<div class="info" id="org9e464c7">
 <p>
 Shortcut Key: <b>U</b>.
 </p>
@@ -1271,14 +1280,14 @@ U stands for Unhide all variables.
 </div>
 </div>
 
-<div id="outline-container-org3205fca" class="outline-3">
-<h3 id="org3205fca"><span class="section-number-3">3.18</span> How to Unhide all variables from the Dataset window?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Dataset">Dataset</span></span></h3>
-<div class="outline-text-3" id="text-3-18">
+<div id="outline-container-org328f3ba" class="outline-3">
+<h3 id="org328f3ba"><span class="section-number-3">4.18.</span> How to Unhide all variables from the Dataset window?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Dataset">Dataset</span></span></h3>
+<div class="outline-text-3" id="text-4-18">
 <p>
 Right click any cell and choose "Unhide Variables" from the context menu.
 </p>
 
-<div class="info">
+<div class="info" id="org92cdf5c">
 <p>
 Shortcut Key: <b>U</b>.
 </p>
@@ -1291,23 +1300,23 @@ U stands for Unhide variables.
 </div>
 </div>
 
-<div id="outline-container-org7786a22" class="outline-3">
-<h3 id="org7786a22"><span class="section-number-3">3.19</span> How to Sort variable list?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Variables">Variables</span></span></h3>
-<div class="outline-text-3" id="text-3-19">
+<div id="outline-container-org4f0df12" class="outline-3">
+<h3 id="org4f0df12"><span class="section-number-3">4.19.</span> How to Sort variable list?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Variables">Variables</span></span></h3>
+<div class="outline-text-3" id="text-4-19">
 <p>
 If there is no CheckBox column in the Variables window, you can sort the variables list. The Variables window will show the columns in the order they appear in the dataset. You can re-sort the variables list by any of the attributes shown by clicking on the header, but the variables will remain in the defined order in the dataset itself.
 </p>
 </div>
 </div>
 
-<div id="outline-container-org5f30a15" class="outline-3">
-<h3 id="org5f30a15"><span class="section-number-3">3.20</span> How to Go to a variable quickly from the Variables window?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Variables">Variables</span></span></h3>
-<div class="outline-text-3" id="text-3-20">
+<div id="outline-container-org931b75e" class="outline-3">
+<h3 id="org931b75e"><span class="section-number-3">4.20.</span> How to Go to a variable quickly from the Variables window?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Variables">Variables</span></span></h3>
+<div class="outline-text-3" id="text-4-20">
 <p>
 Once you've located the variable you want in the Variables list, right click on it and choose “Go to Variable” from the context menu.
 </p>
 
-<div class="info">
+<div class="info" id="orgd49fd30">
 <p>
 Shortcut Key: <b>G</b>.
 </p>
@@ -1319,14 +1328,14 @@ G stands for Go to variable.
 </div>
 </div>
 </div>
-<div id="outline-container-orge286872" class="outline-3">
-<h3 id="orge286872"><span class="section-number-3">3.21</span> How to look up a variable's metadata from the Dataset window?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Dataset">Dataset</span></span></h3>
-<div class="outline-text-3" id="text-3-21">
+<div id="outline-container-org55b043f" class="outline-3">
+<h3 id="org55b043f"><span class="section-number-3">4.21.</span> How to look up a variable's metadata from the Dataset window?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Dataset">Dataset</span></span></h3>
+<div class="outline-text-3" id="text-4-21">
 <p>
 Once you've located the variable in the Dataset window, use the shortcut key G or V to show this variable's metadata in the Variables window.
 </p>
 
-<div class="info">
+<div class="info" id="org714ee96">
 <p>
 Shortcut Key: <b>G</b> or <b>V</b>.
 </p>
@@ -1339,18 +1348,18 @@ G stands for Go to variable metadata; V stands for Variable window.
 </div>
 </div>
 
-<div id="outline-container-org9d3bc98" class="outline-3">
-<h3 id="org9d3bc98"><span class="section-number-3">3.22</span> How to Reorder the variables from the Variables window?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Variables">Variables</span></span></h3>
-<div class="outline-text-3" id="text-3-22">
+<div id="outline-container-orge548745" class="outline-3">
+<h3 id="orge548745"><span class="section-number-3">4.22.</span> How to Reorder the variables from the Variables window?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Variables">Variables</span></span></h3>
+<div class="outline-text-3" id="text-4-22">
 </div>
-<div id="outline-container-org51fd750" class="outline-4">
-<h4 id="org51fd750"><span class="section-number-4">3.22.1</span> Shift Variable Up</h4>
-<div class="outline-text-4" id="text-3-22-1">
+<div id="outline-container-org734461c" class="outline-4">
+<h4 id="org734461c"><span class="section-number-4">4.22.1.</span> Shift Variable Up</h4>
+<div class="outline-text-4" id="text-4-22-1">
 <p>
 Right click on the row/variable and choose "Shift Variable Up", then the variable in the Variables window will shift up, and the variable in the Dataset window will shift left.
 </p>
 
-<div class="info">
+<div class="info" id="org07b6cea">
 <p>
 Shortcut Key: <b>ALT + Up</b>.
 </p>
@@ -1359,14 +1368,14 @@ Shortcut Key: <b>ALT + Up</b>.
 </div>
 </div>
 
-<div id="outline-container-orge16f23a" class="outline-4">
-<h4 id="orge16f23a"><span class="section-number-4">3.22.2</span> Shift Variable Down</h4>
-<div class="outline-text-4" id="text-3-22-2">
+<div id="outline-container-orge04353f" class="outline-4">
+<h4 id="orge04353f"><span class="section-number-4">4.22.2.</span> Shift Variable Down</h4>
+<div class="outline-text-4" id="text-4-22-2">
 <p>
 Right click on the row/variable and choose "Shift Variable Down", then the variable in the Variables window will shift down, and the variable in the Dataset window will shift right.
 </p>
 
-<div class="info">
+<div class="info" id="orgab69d01">
 <p>
 Shortcut Key: <b>ALT + Down</b>.
 </p>
@@ -1376,18 +1385,18 @@ Shortcut Key: <b>ALT + Down</b>.
 </div>
 </div>
 
-<div id="outline-container-org0e6f9e2" class="outline-3">
-<h3 id="org0e6f9e2"><span class="section-number-3">3.23</span> How to Reorder the variables from the Dataset window?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Variables">Variables</span></span></h3>
-<div class="outline-text-3" id="text-3-23">
+<div id="outline-container-org361aeda" class="outline-3">
+<h3 id="org361aeda"><span class="section-number-3">4.23.</span> How to Reorder the variables from the Dataset window?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Variables">Variables</span></span></h3>
+<div class="outline-text-3" id="text-4-23">
 </div>
-<div id="outline-container-orgc8535c1" class="outline-4">
-<h4 id="orgc8535c1"><span class="section-number-4">3.23.1</span> Shift Variable Left</h4>
-<div class="outline-text-4" id="text-3-23-1">
+<div id="outline-container-org9395ae5" class="outline-4">
+<h4 id="org9395ae5"><span class="section-number-4">4.23.1.</span> Shift Variable Left</h4>
+<div class="outline-text-4" id="text-4-23-1">
 <p>
 Right click on the column/variable and choose "Shift Variable Left", then the variable in the Dataset window will shift left, and the variable in the Variables window will shift up.
 </p>
 
-<div class="info">
+<div class="info" id="orgebb1ff1">
 <p>
 Shortcut Key: <b>ALT + Left</b>.
 </p>
@@ -1396,14 +1405,14 @@ Shortcut Key: <b>ALT + Left</b>.
 </div>
 </div>
 
-<div id="outline-container-orgbf45012" class="outline-4">
-<h4 id="orgbf45012"><span class="section-number-4">3.23.2</span> Shift Variable Right</h4>
-<div class="outline-text-4" id="text-3-23-2">
+<div id="outline-container-orgf76f7cd" class="outline-4">
+<h4 id="orgf76f7cd"><span class="section-number-4">4.23.2.</span> Shift Variable Right</h4>
+<div class="outline-text-4" id="text-4-23-2">
 <p>
 Right click on the column/variable and choose "Shift Variable Right", then the variable in the Dataset window will shift right, and the variable in the Variables window will shift up.
 </p>
 
-<div class="info">
+<div class="info" id="org93fba18">
 <p>
 Shortcut Key: <b>ALT + Right</b>.
 </p>
@@ -1413,22 +1422,22 @@ Shortcut Key: <b>ALT + Right</b>.
 </div>
 </div>
 
-<div id="outline-container-orgc38eddb" class="outline-3">
-<h3 id="orgc38eddb"><span class="section-number-3">3.24</span> How to show a specific window?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Window">Window</span></span></h3>
-<div class="outline-text-3" id="text-3-24">
+<div id="outline-container-org9ad0961" class="outline-3">
+<h3 id="org9ad0961"><span class="section-number-3">4.24.</span> How to show a specific window?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Window">Window</span></span></h3>
+<div class="outline-text-3" id="text-4-24">
 <p>
 If one of the docking windows you are looking for is not visible, choose View &gt; Toolbars and Docking Windows &gt; window from the ribbon. Available windows are: Workspace, Variables, Shortcut Keys and Frequency.
 </p>
 </div>
 </div>
 
-<div id="outline-container-org3c5a6b6" class="outline-3">
-<h3 id="org3c5a6b6"><span class="section-number-3">3.25</span> How to show the Variables window quickly?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Window">Window</span></span></h3>
-<div class="outline-text-3" id="text-3-25">
+<div id="outline-container-orgc754d76" class="outline-3">
+<h3 id="orgc754d76"><span class="section-number-3">4.25.</span> How to show the Variables window quickly?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Window">Window</span></span></h3>
+<div class="outline-text-3" id="text-4-25">
 <p>
 Use the shortcut key V. 
 </p>
-<div class="info">
+<div class="info" id="org6251756">
 <p>
 Shortcut Key: <b>V</b>.
 </p>
@@ -1441,21 +1450,21 @@ V stands for Variable window.
 </div>
 </div>
 
-<div id="outline-container-org21bfed8" class="outline-3">
-<h3 id="org21bfed8"><span class="section-number-3">3.26</span> How to dock and float a specific window?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Window">Window</span></span></h3>
-<div class="outline-text-3" id="text-3-26">
+<div id="outline-container-org55b1a3e" class="outline-3">
+<h3 id="org55b1a3e"><span class="section-number-3">4.26.</span> How to dock and float a specific window?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Window">Window</span></span></h3>
+<div class="outline-text-3" id="text-4-26">
 <p>
 Once opened, you can toggle between docked/pinned and floating by double clicking on the window's title bar. Docked windows can be pinned to remain open or unpinned to automatically hide when you click outside of them. You can dock a window to any of the four edges of the main application window by dragging it to the edge where you want it to be.  
 </p>
 
-<div class="info">
+<div class="info" id="org328c91f">
 <p>
 Tip: send a floating window off-screen to another monitor if you are using an extended desktop. 
 </p>
 
 </div>
 
-<div class="info">
+<div class="info" id="orgdb56d3b">
 <p>
 Tip: resize windows by grabbing a side and dragging it.
 </p>
@@ -1464,23 +1473,23 @@ Tip: resize windows by grabbing a side and dragging it.
 </div>
 </div>
 
-<div id="outline-container-orgc48eaee" class="outline-3">
-<h3 id="orgc48eaee"><span class="section-number-3">3.27</span> How to view one dataset in two separated tabs?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Window">Window</span></span></h3>
-<div class="outline-text-3" id="text-3-27">
+<div id="outline-container-org5020055" class="outline-3">
+<h3 id="org5020055"><span class="section-number-3">4.27.</span> How to view one dataset in two separated tabs?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Window">Window</span></span></h3>
+<div class="outline-text-3" id="text-4-27">
 <p>
 Datasets maybe viewed as tabs in a single window or may be separated into individual tabs. To separate them, grab the tab and move it till the page icon appears, then drag it down into the body of the dataset window. To move them back together into a single window, grab and drag it back to the dataset window of your choice. 
 </p>
 </div>
 </div>
 
-<div id="outline-container-org1a5e5aa" class="outline-3">
-<h3 id="org1a5e5aa"><span class="section-number-3">3.28</span> How to add a Library to the Workspace?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Library">Library</span></span></h3>
-<div class="outline-text-3" id="text-3-28">
+<div id="outline-container-org0ed39b5" class="outline-3">
+<h3 id="org0ed39b5"><span class="section-number-3">4.28.</span> How to add a Library to the Workspace?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Library">Library</span></span></h3>
+<div class="outline-text-3" id="text-4-28">
 <p>
 Click on the 'Open' icon at the top left corner of the screen in the Standard menu, or use the keyboard shortcut CTRL+O, and then navigate to the library of your choice. Open a dataset. The entire library will now be available through the Workspace tab in SASHelper. 
 </p>
 
-<div class="info">
+<div class="info" id="org436a1e9">
 <p>
 Tip: If you already have the folder open in Windows Explorer, just copy and paste the address into the Open window.  
 </p>
@@ -1488,7 +1497,7 @@ Tip: If you already have the folder open in Windows Explorer, just copy and past
 </div>
 
 
-<div class="info">
+<div class="info" id="org2a1ab37">
 <p>
 Tip: Can't find the 'Open' icon?  Make sure the Standard toolbar is being displayed. Choose 'View&gt; Toolbars and Docking Windows &gt; Standard' from the Ribbon menu
 </p>
@@ -1496,36 +1505,36 @@ Tip: Can't find the 'Open' icon?  Make sure the Standard toolbar is being displa
 </div>
 </div>
 </div>
-<div id="outline-container-orgc3578f8" class="outline-3">
-<h3 id="orgc3578f8"><span class="section-number-3">3.29</span> How to remove a Library from the Workspace?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Library">Library</span></span></h3>
-<div class="outline-text-3" id="text-3-29">
+<div id="outline-container-org7a21003" class="outline-3">
+<h3 id="org7a21003"><span class="section-number-3">4.29.</span> How to remove a Library from the Workspace?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Library">Library</span></span></h3>
+<div class="outline-text-3" id="text-4-29">
 <p>
 From the Workspace tab, right click on the library to be removed, and choose 'Remove' from the context menu.
 </p>
 </div>
 </div>
 
-<div id="outline-container-org97dc398" class="outline-3">
-<h3 id="org97dc398"><span class="section-number-3">3.30</span> How to Refresh a Library in the Workspace?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Library">Library</span></span></h3>
-<div class="outline-text-3" id="text-3-30">
+<div id="outline-container-orgbd8fc3f" class="outline-3">
+<h3 id="orgbd8fc3f"><span class="section-number-3">4.30.</span> How to Refresh a Library in the Workspace?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Library">Library</span></span></h3>
+<div class="outline-text-3" id="text-4-30">
 <p>
 From the Workspace tab, right click on the library to be refreshed, and choose 'Refresh' from the context menu.
 </p>
 </div>
 </div>
 
-<div id="outline-container-orgf3afbc0" class="outline-3">
-<h3 id="orgf3afbc0"><span class="section-number-3">3.31</span> How to Open a dataset?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Dataset">Dataset</span></span></h3>
-<div class="outline-text-3" id="text-3-31">
+<div id="outline-container-org8651447" class="outline-3">
+<h3 id="org8651447"><span class="section-number-3">4.31.</span> How to Open a dataset?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Dataset">Dataset</span></span></h3>
+<div class="outline-text-3" id="text-4-31">
 <p>
 Once you've registered a Library in the Workspace, you can simply double click on a dataset to open it.
 </p>
 </div>
 </div>
 
-<div id="outline-container-org949602a" class="outline-3">
-<h3 id="org949602a"><span class="section-number-3">3.32</span> How to Set libname for a library?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Library">Library</span></span></h3>
-<div class="outline-text-3" id="text-3-32">
+<div id="outline-container-org9b9b7c6" class="outline-3">
+<h3 id="org9b9b7c6"><span class="section-number-3">4.32.</span> How to Set libname for a library?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Library">Library</span></span></h3>
+<div class="outline-text-3" id="text-4-32">
 <ul class="org-ul">
 <li>Right click on the library</li>
 <li>Choose "Set Libname" and a dialog window "SAS Helper - Library Alias" will show</li>
@@ -1534,9 +1543,9 @@ Once you've registered a Library in the Workspace, you can simply double click o
 </div>
 </div>
 
-<div id="outline-container-org1aa5d76" class="outline-3">
-<h3 id="org1aa5d76"><span class="section-number-3">3.33</span> How to remove libname for a library?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Library">Library</span></span></h3>
-<div class="outline-text-3" id="text-3-33">
+<div id="outline-container-org1b3b600" class="outline-3">
+<h3 id="org1b3b600"><span class="section-number-3">4.33.</span> How to remove libname for a library?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Library">Library</span></span></h3>
+<div class="outline-text-3" id="text-4-33">
 <ul class="org-ul">
 <li>Right click on the library</li>
 <li>Choose "Set Libname" and a dialog window "SAS Helper - Library Alias" will show</li>
@@ -1545,27 +1554,27 @@ Once you've registered a Library in the Workspace, you can simply double click o
 </div>
 </div>
 
-<div id="outline-container-org5c8af22" class="outline-3">
-<h3 id="org5c8af22"><span class="section-number-3">3.34</span> How to Watch File Changes?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Library">Library</span></span></h3>
-<div class="outline-text-3" id="text-3-34">
+<div id="outline-container-org635a8eb" class="outline-3">
+<h3 id="org635a8eb"><span class="section-number-3">4.34.</span> How to Watch File Changes?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Library">Library</span></span></h3>
+<div class="outline-text-3" id="text-4-34">
 <p>
 Right click on the library, then choose "Watch File Changes". Now you will find that this library will refresh automatically to reflect all the file changes of that folder.
 </p>
 </div>
 </div>
 
-<div id="outline-container-org3fd116d" class="outline-3">
-<h3 id="org3fd116d"><span class="section-number-3">3.35</span> How to Open New Dataset Automatically?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Library">Library</span></span></h3>
-<div class="outline-text-3" id="text-3-35">
+<div id="outline-container-org2984196" class="outline-3">
+<h3 id="org2984196"><span class="section-number-3">4.35.</span> How to Open New Dataset Automatically?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Library">Library</span></span></h3>
+<div class="outline-text-3" id="text-4-35">
 <p>
 While Watch File Changes is on, right click on the library, then choose "Open New Dataset Automatically". Now you will see the new created SAS datasets in this library will be opened by SASHelper automatically.
 </p>
 </div>
 </div>
 
-<div id="outline-container-org3774b4c" class="outline-3">
-<h3 id="org3774b4c"><span class="section-number-3">3.36</span> How to View Dataset Variables like SAS Universal Viewer?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Library">Library</span></span></h3>
-<div class="outline-text-3" id="text-3-36">
+<div id="outline-container-org0976dab" class="outline-3">
+<h3 id="org0976dab"><span class="section-number-3">4.36.</span> How to View Dataset Variables like SAS Universal Viewer?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Library">Library</span></span></h3>
+<div class="outline-text-3" id="text-4-36">
 <ul class="org-ul">
 <li>Right click on the library, then choose "View Dataset Variables" to toggle this feature on.</li>
 <li>Click on a dataset in this library, the Variables window will show this dataset's variables metadata.</li>
@@ -1573,13 +1582,13 @@ While Watch File Changes is on, right click on the library, then choose "Open Ne
 </div>
 </div>
 
-<div id="outline-container-org3d5d619" class="outline-3">
-<h3 id="org3d5d619"><span class="section-number-3">3.37</span> How to enter the Library filter manually?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Filter">Filter</span>&#xa0;<span class="Library">Library</span></span></h3>
-<div class="outline-text-3" id="text-3-37">
+<div id="outline-container-orgfff7446" class="outline-3">
+<h3 id="orgfff7446"><span class="section-number-3">4.37.</span> How to enter the Library filter manually?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Filter">Filter</span>&#xa0;<span class="Library">Library</span></span></h3>
+<div class="outline-text-3" id="text-4-37">
 <p>
 Press the shortcut key "F5" to focus the Command ComboBox, then you can enter the filter condition there, such as <i>where usubjid = "CDISC01.100014"</i>.
 </p>
-<div class="info">
+<div class="info" id="orgae5fda5">
 <p>
 Shortcut Key: <b>F5</b>.
 </p>
@@ -1588,14 +1597,14 @@ Shortcut Key: <b>F5</b>.
 </div>
 </div>
 
-<div id="outline-container-org345e8ac" class="outline-3">
-<h3 id="org345e8ac"><span class="section-number-3">3.38</span> How to enter the Dataset filter manually?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Filter">Filter</span>&#xa0;<span class="Dataset">Dataset</span></span></h3>
-<div class="outline-text-3" id="text-3-38">
+<div id="outline-container-org1201f87" class="outline-3">
+<h3 id="org1201f87"><span class="section-number-3">4.38.</span> How to enter the Dataset filter manually?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Filter">Filter</span>&#xa0;<span class="Dataset">Dataset</span></span></h3>
+<div class="outline-text-3" id="text-4-38">
 <p>
 Press the shortcut key "F5" to focus the Command ComboBox, then you can enter the filter condition there, such as <i>if age = 66 and sex = "F"</i>
 </p>
 
-<div class="info">
+<div class="info" id="org80004e8">
 <p>
 Shortcut Key: <b>F5</b>.
 </p>
@@ -1604,16 +1613,16 @@ Shortcut Key: <b>F5</b>.
 </div>
 </div>
 
-<div id="outline-container-orge1c0fed" class="outline-3">
-<h3 id="orge1c0fed"><span class="section-number-3">3.39</span> How to find?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Find">Find</span></span></h3>
-<div class="outline-text-3" id="text-3-39">
+<div id="outline-container-org38044a0" class="outline-3">
+<h3 id="org38044a0"><span class="section-number-3">4.39.</span> How to find?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Find">Find</span></span></h3>
+<div class="outline-text-3" id="text-4-39">
 <ul class="org-ul">
 <li>Click the Find ComboBox</li>
 <li>Type in the keyword, such as "white"</li>
 <li>Press Enter key or click the Find button on the right.</li>
 </ul>
 
-<div class="info">
+<div class="info" id="org4b5cd67">
 <p>
 Shortcut Key: <b>Ctrl + F</b> or <b>Alt + S</b>.
 </p>
@@ -1626,14 +1635,14 @@ F stands for Find; S stands for Search.
 </div>
 </div>
 
-<div id="outline-container-org9e5eed9" class="outline-3">
-<h3 id="org9e5eed9"><span class="section-number-3">3.40</span> How to find next?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Find">Find</span></span></h3>
-<div class="outline-text-3" id="text-3-40">
+<div id="outline-container-org8d15ea1" class="outline-3">
+<h3 id="org8d15ea1"><span class="section-number-3">4.40.</span> How to find next?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Find">Find</span></span></h3>
+<div class="outline-text-3" id="text-4-40">
 <p>
 Use the shortcut key F3 or S.
 </p>
 
-<div class="info">
+<div class="info" id="orgdd07fff">
 <p>
 Shortcut Key: <b>F3</b> or <b>S</b>.
 </p>
@@ -1646,14 +1655,14 @@ F3 is used by many applications; S stands for Search.
 </div>
 </div>
 
-<div id="outline-container-orged1a29d" class="outline-3">
-<h3 id="orged1a29d"><span class="section-number-3">3.41</span> How to find previous?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Find">Find</span></span></h3>
-<div class="outline-text-3" id="text-3-41">
+<div id="outline-container-org8e623fb" class="outline-3">
+<h3 id="org8e623fb"><span class="section-number-3">4.41.</span> How to find previous?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Find">Find</span></span></h3>
+<div class="outline-text-3" id="text-4-41">
 <p>
 Use the shortcut key Shift + F3 or R.
 </p>
 
-<div class="info">
+<div class="info" id="orga2ec016">
 <p>
 Shortcut Key: <b>Shift + F3</b> or <b>R</b>.
 </p>
@@ -1666,18 +1675,18 @@ Shift + F3 is used by many applications; R stands for Reverse search.
 </div>
 </div>
 
-<div id="outline-container-org846a505" class="outline-3">
-<h3 id="org846a505"><span class="section-number-3">3.42</span> How to quickly locate a variable by finding the variable name?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Find">Find</span></span></h3>
-<div class="outline-text-3" id="text-3-42">
+<div id="outline-container-org1f60a8a" class="outline-3">
+<h3 id="org1f60a8a"><span class="section-number-3">4.42.</span> How to quickly locate a variable by finding the variable name?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Find">Find</span></span></h3>
+<div class="outline-text-3" id="text-4-42">
 <p>
 If the feature "Locate the variable by searching variable name" is on, you can type in the variable name in the Find ComboBox to locate the variable in the dataset window quickly.
 </p>
 </div>
 </div>
 
-<div id="outline-container-orgb2e12cb" class="outline-3">
-<h3 id="orgb2e12cb"><span class="section-number-3">3.43</span> How to set a different font(name, size, etc) for the dataset window?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Option">Option</span></span></h3>
-<div class="outline-text-3" id="text-3-43">
+<div id="outline-container-orgcfb484e" class="outline-3">
+<h3 id="orgcfb484e"><span class="section-number-3">4.43.</span> How to set a different font(name, size, etc) for the dataset window?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Option">Option</span></span></h3>
+<div class="outline-text-3" id="text-4-43">
 <ul class="org-ul">
 <li>Click Edit -&gt; Options</li>
 <li>Click "Font" button from the dialog window "SAS Helper Options"</li>
@@ -1685,14 +1694,14 @@ If the feature "Locate the variable by searching variable name" is on, you can t
 </div>
 </div>
 
-<div id="outline-container-org815f62a" class="outline-3">
-<h3 id="org815f62a"><span class="section-number-3">3.44</span> How to increase the font size quickly?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Shortcuts">Shortcuts</span>&#xa0;<span class="Dataset">Dataset</span></span></h3>
-<div class="outline-text-3" id="text-3-44">
+<div id="outline-container-org3374d7f" class="outline-3">
+<h3 id="org3374d7f"><span class="section-number-3">4.44.</span> How to increase the font size quickly?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Shortcuts">Shortcuts</span>&#xa0;<span class="Dataset">Dataset</span></span></h3>
+<div class="outline-text-3" id="text-4-44">
 <p>
 Use the shortcut key Ctrl + +.
 </p>
 
-<div class="info">
+<div class="info" id="orgbeab220">
 <p>
 Shortcut Key: <b>Ctrl + +</b>.
 </p>
@@ -1705,14 +1714,14 @@ Shortcut Key: <b>Ctrl + +</b>.
 </div>
 </div>
 
-<div id="outline-container-org0a7b177" class="outline-3">
-<h3 id="org0a7b177"><span class="section-number-3">3.45</span> How to decrease the font size quickly?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Shortcuts">Shortcuts</span>&#xa0;<span class="Dataset">Dataset</span></span></h3>
-<div class="outline-text-3" id="text-3-45">
+<div id="outline-container-org7272797" class="outline-3">
+<h3 id="org7272797"><span class="section-number-3">4.45.</span> How to decrease the font size quickly?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Shortcuts">Shortcuts</span>&#xa0;<span class="Dataset">Dataset</span></span></h3>
+<div class="outline-text-3" id="text-4-45">
 <p>
 Use the shortcut key Ctrl + -.
 </p>
 
-<div class="info">
+<div class="info" id="org73b17ce">
 <p>
 Shortcut Key: <b>Ctrl + -</b>.
 </p>
@@ -1726,25 +1735,25 @@ Shortcut Key: <b>Ctrl + -</b>.
 </div>
 </div>
 
-<div id="outline-container-org149d990" class="outline-2">
-<h2 id="org149d990"><span class="section-number-2">4</span> Shortcut Keys</h2>
-<div class="outline-text-2" id="text-4">
+<div id="outline-container-orga83f93b" class="outline-2">
+<h2 id="orga83f93b"><span class="section-number-2">5.</span> Shortcut Keys</h2>
+<div class="outline-text-2" id="text-5">
 <p>
 Use the Shortcut Keys window to show the list of shortcut keys
 </p>
 </div>
-<div id="outline-container-orgb538968" class="outline-3">
-<h3 id="orgb538968"><span class="section-number-3">4.1</span> Dataset Window</h3>
-<div class="outline-text-3" id="text-4-1">
-<table border="2" rules="all" frame="border">
+<div id="outline-container-org431abf4" class="outline-3">
+<h3 id="org431abf4"><span class="section-number-3">5.1.</span> Dataset Window</h3>
+<div class="outline-text-3" id="text-5-1">
+<table border="2" cellspacing="0" cellpadding="6" rules="all" frame="border">
 
 
 <colgroup>
-<col  class="org-left">
+<col  class="org-left" />
 
-<col  class="org-left">
+<col  class="org-left" />
 
-<col  class="org-left">
+<col  class="org-left" />
 </colgroup>
 <tbody>
 <tr>
@@ -1936,18 +1945,18 @@ Use the Shortcut Keys window to show the list of shortcut keys
 </table>
 </div>
 </div>
-<div id="outline-container-org05bb3c5" class="outline-3">
-<h3 id="org05bb3c5"><span class="section-number-3">4.2</span> Frequency Window</h3>
-<div class="outline-text-3" id="text-4-2">
-<table border="2" rules="all" frame="border">
+<div id="outline-container-org69dacc9" class="outline-3">
+<h3 id="org69dacc9"><span class="section-number-3">5.2.</span> Frequency Window</h3>
+<div class="outline-text-3" id="text-5-2">
+<table border="2" cellspacing="0" cellpadding="6" rules="all" frame="border">
 
 
 <colgroup>
-<col  class="org-left">
+<col  class="org-left" />
 
-<col  class="org-left">
+<col  class="org-left" />
 
-<col  class="org-left">
+<col  class="org-left" />
 </colgroup>
 <tbody>
 <tr>
@@ -1990,18 +1999,18 @@ Use the Shortcut Keys window to show the list of shortcut keys
 </div>
 </div>
 
-<div id="outline-container-org6b07ef6" class="outline-3">
-<h3 id="org6b07ef6"><span class="section-number-3">4.3</span> Variables Window</h3>
-<div class="outline-text-3" id="text-4-3">
-<table border="2" rules="all" frame="border">
+<div id="outline-container-orgabb0b73" class="outline-3">
+<h3 id="orgabb0b73"><span class="section-number-3">5.3.</span> Variables Window</h3>
+<div class="outline-text-3" id="text-5-3">
+<table border="2" cellspacing="0" cellpadding="6" rules="all" frame="border">
 
 
 <colgroup>
-<col  class="org-left">
+<col  class="org-left" />
 
-<col  class="org-left">
+<col  class="org-left" />
 
-<col  class="org-left">
+<col  class="org-left" />
 </colgroup>
 <tbody>
 <tr>
@@ -2049,18 +2058,18 @@ Use the Shortcut Keys window to show the list of shortcut keys
 </table>
 </div>
 </div>
-<div id="outline-container-org9e5ef26" class="outline-3">
-<h3 id="org9e5ef26"><span class="section-number-3">4.4</span> Workspace Window</h3>
-<div class="outline-text-3" id="text-4-4">
-<table border="2" rules="all" frame="border">
+<div id="outline-container-orgb552fed" class="outline-3">
+<h3 id="orgb552fed"><span class="section-number-3">5.4.</span> Workspace Window</h3>
+<div class="outline-text-3" id="text-5-4">
+<table border="2" cellspacing="0" cellpadding="6" rules="all" frame="border">
 
 
 <colgroup>
-<col  class="org-left">
+<col  class="org-left" />
 
-<col  class="org-left">
+<col  class="org-left" />
 
-<col  class="org-left">
+<col  class="org-left" />
 </colgroup>
 <tbody>
 <tr>
@@ -2082,8 +2091,8 @@ Use the Shortcut Keys window to show the list of shortcut keys
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Phyllis Wolf, Kenneth Yan</p>
-<p class="date">Created: 2018-11-16 Fri 16:56</p>
-<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+<p class="date">Created: 2022-07-11 Mon 18:23</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
 </html>
